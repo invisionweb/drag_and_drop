@@ -20,13 +20,14 @@
       <div class="draggable cursor-move select-none" id="flex">Image</div>
     </div>
     <div class="col-span-6">
+      <div class="p-6 border border-dashed" id="draggable-items-container"></div>
       <div
         id="main-canvas"
-        class="droppable min-h-full w-full border"
+        class="droppable min-h-full w-full border hidden"
       ></div>
     </div>
     <div class="flex flex-col col-span-1">
-      <div id="element">New element selected</div>
+      <div id="element" class="hidden"></div>
       <div>Margin</div>
       <select @change="add_class" id="m">
         <option>m-0</option>
@@ -59,6 +60,7 @@
       </div>
     </div>
   </div>
+  <div contenteditable class="w-full border rounded-md resize" id="code-editor"></div>
   <div class="border rounded-md m-6" id="code_editor"></div>
 </template>
 
@@ -137,12 +139,51 @@ export default {
     let self = this;
 
     $(function() {
-      $(".draggable").draggable({
+      /* $(".draggable").draggable({
         helper: "clone",
         start: function() {
           self.dragging_element_name = $(this).attr("id");
         },
-      });
+      }); */
+
+$( ".draggable" ).draggable({
+      connectToSortable: "#draggable-items-container",
+      helper: "clone",
+      //revert: "invalid",
+      start: function() {
+          self.dragging_element_name = $(this).attr("id");
+      }
+    });
+
+      $( "#draggable-items-container" ).sortable({
+            placeholder: "border border-dotted p-4",
+            //revert: true,
+            /* update: function(event, ui ){
+                var item = ui.item;
+              var target = ui.item.prev();
+
+              console.log(item, target)
+            }, */
+            beforeStop: function(event, ui) { 
+              console.log('beforestop')
+let element
+if (self.dragging_element_name === "text") {
+            element = document.createElement("p");
+            $(element)
+              .text("This is text")
+              .addClass("text-gray-700").click(function(){
+          alert('ui.item')
+        })
+          }
+
+        $(ui.item).replaceWith(element)
+        
+    }
+      })/* .droppable({
+        drop: function( event, ui ) {
+           console.log('drop - ', event, ui)
+        }
+    }) */
 
       $(".droppable").droppable({
         accept: ".draggable",
@@ -214,7 +255,7 @@ export default {
                 placeholder: "bg-yellow-200 p-2",
                 //connectWith: ".connectedSortable"
               })
-              .resizable();
+              //.resizable();
           } else if (self.dragging_element_name === "grid") {
             element = document.createElement("div");
             $(element)
@@ -227,13 +268,22 @@ export default {
           }
 
           $(this).append(element);
-          $(element).contextmenu(function(e) {
-            self.selected_element = $(e.target)
+          $(element).contextmenu(function() {
+            /* self.selected_element = $(e.target)
             console.log("right clicked", $(e.target).attr("class"));
             $("#element").text( $(e.target).prop('tagName') )
+            */
             return false;
           });
 
+          $(element).click(function(e) {
+            self.selected_element = $(e.target)
+            console.log("right clicked", $(e.target).attr("class"));
+            $("#element").text( $(e.target).prop('tagName') ).removeClass("hidden")
+            return false;
+          });
+
+          $("#code-editor").text(js_beautify.html( $(this).html(), { indent_size: 2, space_in_empty_parent: true }))
           //self.code_editor.setValue(js_beautify.html( $(this).html(), { indent_size: 2, space_in_empty_parent: true }));
           //self.code_editor.setValue($(this).html());
         },
@@ -248,11 +298,11 @@ export default {
       //let code_editor = $("#code_editor")
       self.code_editor = CodeMirror(document.getElementById("code_editor"), {
         value: "",
-        mode: "htmlmixed",
+        //mode: "htmlmixed",
         lineNumbers: true,
         //theme: 'monokai',
         //styleActiveLine: true,
-        matchBrackets: true,
+        //matchBrackets: true,
         scrollbarStyle: "simple",
       });
 
