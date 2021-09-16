@@ -32,7 +32,7 @@
     </div>
     <div class="flex flex-col col-span-2">
       <div id="element" class="hidden"></div>
-      <input class="border border-green-500 outline-none p-2" type="text" placeholder="Classes">
+      <input v-model="selected_element_classes" class="border border-green-500 outline-none p-2" type="text" placeholder="Classes">
       <textarea class="border border-black hidden" v-model="selected_element_html" @keyup="element_html_change" id="element-html"></textarea>
       <div>Margin</div>
       <select @change="add_class" id="m">
@@ -64,6 +64,8 @@
           <option>flex-col</option>
         </select>
       </div>
+      <button class="border border-green-400" @click="duplicate_element">Duplicate element</button>
+      <button class="bg-red-500 text-white" @click="delete_element">Delete element</button>
     </div>
   </div>
   <div
@@ -102,7 +104,8 @@ export default {
       dragging_element_name: "",
       code_editor: null,
       selected_element: null,
-      selected_element_html: ""
+      selected_element_html: "",
+      selected_element_classes: ""
     };
   },
   methods: {
@@ -135,6 +138,7 @@ export default {
       $(this.selected_element).attr("class", classes);
 
       this.selected_element_html = $(this.selected_element).prop("outerHTML")
+      this.selected_element_classes = $(this.selected_element).attr("class")
     },
 
     //let new_classes = ""
@@ -161,8 +165,17 @@ export default {
       $(this.selected_element).remove()
       this.selected_element = new_elem
     },
+    duplicate_element(){
+      let new_elem = $(this.selected_element).clone(true)
+      //$(this.selected_element).clone(true).appendTo($(this.selected_element).parent())
+      new_elem.insertAfter($(this.selected_element))
+    },
+    delete_element: function (){
+      $(this.selected_element).remove()
+    },
     create_dropped_element(){
-        let self = this
+      let self = this
+
       let element;
       if (self.dragging_element_name === "input") {
         element = document.createElement("input");
@@ -216,7 +229,7 @@ export default {
 
                 $(ui.item).replaceWith(self.create_dropped_element());
 
-                $("#code-editor").text(js_beautify.html($(this).html()))
+                $("#code-editor").text(js_beautify.html($("#draggable-items-container").html()))
               }
             })
         //.resizable();
@@ -233,6 +246,7 @@ export default {
 
       //$(this).append(this.create_dropped_element(self.dragging_element_name)); //element
       $(element).contextmenu(function() {
+        alert('Apply style')
         /* self.selected_element = $(e.target)
         console.log("right clicked", $(e.target).attr("class"));
         $("#element").text( $(e.target).prop('tagName') )
@@ -246,6 +260,7 @@ export default {
         $("#element").text( $(e.target).prop('tagName') ).removeClass("hidden")
         //$("#element-html").val($(e.target).prop('outerHTML'))
         self.selected_element_html = $(e.target).prop('outerHTML')
+        self.selected_element_classes = $(e.target).attr('class')
         return false;
       });
 
@@ -482,6 +497,9 @@ export default {
     });
   },
   watch: {
+    selected_element_classes(){
+      $(this.selected_element).attr("class", this.selected_element_classes)
+    }
     /*selected_element_html(){
       let self = this
       console.log($(this.selected_element))
