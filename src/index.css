@@ -2,3 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.selected-element {
+    @apply ring-2 ring-red-400;
+}

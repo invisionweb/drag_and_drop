@@ -33,6 +33,7 @@
     <div class="flex flex-col col-span-2">
       <div id="element" class="hidden"></div>
       <input v-model="selected_element_classes" class="border border-green-500 outline-none p-2" type="text" placeholder="Classes">
+      <input v-model="selected_element_inner_html" class="border border-green-500 outline-none p-2" type="text" placeholder="innerHTML">
       <textarea class="border border-black hidden" v-model="selected_element_html" @keyup="element_html_change" id="element-html"></textarea>
       <div>Margin</div>
       <select @change="add_class" id="m">
@@ -51,7 +52,14 @@
       <div>Border</div>
       <div>Width - Height</div>
       <div>Alignment</div>
-      <div>Background color</div>
+      <div>Background color
+        <select @change="add_class" id="bg">
+          <option value="" selected>Not selected</option>
+          <option>bg-green-300</option>
+          <option>bg-indigo-300</option>
+          <option>bg-red-400</option>
+        </select>
+      </div>
       <div>Text color</div>
       <div>Text size</div>
       <div>Shadow</div>
@@ -70,7 +78,7 @@
   </div>
   <div
     contenteditable
-    class="w-full border rounded-md resize"
+    class="mx-auto my-8 outline-none max-w-4xl border resize font-mono text-sm p-2"
     id="code-editor"
   ></div>
   <div class="border rounded-md m-6" id="code_editor"></div>
@@ -105,6 +113,7 @@ export default {
       code_editor: null,
       selected_element: null,
       selected_element_html: "",
+      selected_element_inner_html: "",
       selected_element_classes: ""
     };
   },
@@ -128,6 +137,13 @@ export default {
         }
       } else if (style_to_apply === "m") {
         classes = classes.replace(/m-\d+/gim, class_to_add);
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      }
+      else if (style_to_apply === "bg") {
+        classes = classes.replace(/bg-\w+-\d+/gim, class_to_add);
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
@@ -166,7 +182,7 @@ export default {
       this.selected_element = new_elem
     },
     duplicate_element(){
-      let new_elem = $(this.selected_element).clone(true)
+      let new_elem = $(this.selected_element).clone(true).removeClass('selected-element')
       //$(this.selected_element).clone(true).appendTo($(this.selected_element).parent())
       new_elem.insertAfter($(this.selected_element))
     },
@@ -257,9 +273,12 @@ export default {
       $(element).click(function(e) {
         self.selected_element = e.target
         console.log("left clicked", $(e.target).attr("class"));
-        $("#element").text( $(e.target).prop('tagName') ).removeClass("hidden")
+        //$("#element").text( $(e.target).prop('tagName') ).removeClass("hidden")
         //$("#element-html").val($(e.target).prop('outerHTML'))
         self.selected_element_html = $(e.target).prop('outerHTML')
+
+        $("#draggable-items-container").find('*')/*.children()*/.removeClass('selected-element')
+        $(e.target).addClass('selected-element')
         self.selected_element_classes = $(e.target).attr('class')
         return false;
       });
@@ -335,7 +354,12 @@ export default {
 
           self.dragging_element_name = ""
         },
-      }) 
+      })
+      .click(function (e) {
+        $(e.target).find('*').removeClass('selected-element')
+        self.selected_element = null
+        //$(self.selected_element).removeClass('selected-element')
+      })
       /* .droppable({
         drop: function( event, ui ) {
            console.log('drop - ', event, ui)
@@ -497,6 +521,12 @@ export default {
     });
   },
   watch: {
+    selected_element(){
+      this.selected_element_inner_html = $(this.selected_element).html()
+    },
+    selected_element_inner_html(){
+      $(this.selected_element).html(this.selected_element_inner_html)
+    },
     selected_element_classes(){
       $(this.selected_element).attr("class", this.selected_element_classes)
     }
@@ -509,6 +539,6 @@ export default {
         //$(self.selected_element).replaceWith(self.selected_element_html)
       }, 3000)
     }*/
-  }
+  },
 };
 </script>
