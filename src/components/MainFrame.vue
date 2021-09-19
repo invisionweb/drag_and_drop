@@ -1,14 +1,24 @@
 <template>
   <div class="flex items-center p-4 gap-4">
+    <h1 class="text-2xl font-medium text-gray-500">UI Builder for</h1>
     <img
         src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg"
         alt="TailwindCSS"
         class="h-6 w-auto"
     />
-    <h1 class="text-2xl font-medium text-gray-500">Builder</h1>
-    <button @click="clear_canvas">Clear</button>
-    <button @click="clear_canvas">Preview</button>
-    <button class="px-3 py-2 text-white shadow bg-indigo-700 rounded-md font-medium" @click="clear_canvas">Code</button>
+    <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200" @click="clear_canvas" title="Clear Canvas">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+      </svg>
+      Clear canvas
+    </button>
+    <button class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white" @click="clear_canvas" title="Clear Canvas">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+      Get code
+    </button>
+    <!-- <button @click="clear_canvas">Preview</button>-->
   </div>
   <div class="grid grid-cols-8">
     <div class="flex flex-col col-span-1" title="Drag Elements to canvas">
@@ -23,17 +33,17 @@
       <div class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500" id="button">
         <button class="bg-black text-white text-xs p-2 rounded-md">Button</button>
       </div>
-      <div class="draggable cursor-move select-none" id="input">
+      <div class="p-2 draggable cursor-move select-none" id="input">
         <input placeholder="Write here" type="text" class="w-3/4 text-xs border border-indigo-600 outline-none rounded p-2">
       </div>
       <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
-      <div class="draggable cursor-move select-none" id="flex">
-        <div class="p-2 inline-flex space-x-2 bg-indigo-300 bg-stripes bg-stripes-white rounded-md">
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-3 py-1">1</div>
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-3 py-1">2</div>
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-3 py-1">3</div></div>
+      <div class="p-2 draggable cursor-move select-none" id="flex">
+        <div class="p-2 inline-flex space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
+          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-400 px-3 py-1">1</div>
+          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-400 px-3 py-1">2</div>
+          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-400 px-3 py-1">3</div></div>
       </div>
-      <div class="draggable cursor-move select-none" id="img">
+      <div class="p-1 draggable cursor-move select-none" id="img">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
@@ -93,7 +103,7 @@
       <div>
         Flex
 
-        <div class="p-4 inline-flex space-x-4 bg-indigo-300 bg-stripes bg-stripes-white rounded-md">
+        <div class="p-4 inline-flex space-x-4 bg-indigo-50 bg-stripes bg-stripes-white rounded-md">
           <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-6 py-4">1</div>
           <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-6 py-4">2</div>
           <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-6 py-4">3</div>
@@ -609,18 +619,18 @@ export default {
         classes: {
           "ui-tooltip": "bg-yellow-100 text-xs rounded-md border-none"
         },
-        position: {
+        /*position: {
           my: "center bottom-5",
           at: "center top",
-          /*using: function( position, feedback ) {
+          using: function( position, feedback ) {
             $( this ).css( position );
             $( "<div>" )
                 .addClass( "bg-yellow-500" )
                 .addClass( feedback.vertical )
                 .addClass( feedback.horizontal )
                 .appendTo( this );
-          }*/
-        }
+          }
+        }*/
       });
 
     });
