@@ -20,7 +20,7 @@
     </button>
     <!-- <button @click="clear_canvas">Preview</button>-->
   </div>
-  <div class="grid grid-cols-8">
+  <div class="grid grid-cols-8 gap-4">
     <div class="flex flex-col col-span-1" title="Drag Elements to canvas">
       <!-- <div class="draggable cursor-move select-none">Container</div> -->
       <div class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500" id="text">
@@ -34,37 +34,37 @@
         <button class="bg-black text-white text-xs p-2 rounded-md">Button</button>
       </div>
       <div class="p-2 draggable cursor-move select-none" id="input">
-        <input placeholder="Write here" type="text" class="w-3/4 text-xs border border-indigo-600 outline-none rounded p-2">
+        <input placeholder="Write here" type="text" class="w-full text-xs border border-indigo-600 outline-none rounded p-2">
       </div>
       <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
       <div class="p-2 draggable cursor-move select-none" id="flex">
-        <div class="p-2 inline-flex space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-400 px-3 py-1">1</div>
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-400 px-3 py-1">2</div>
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-400 px-3 py-1">3</div></div>
+        <div class="w-full p-2 inline-flex space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-1/3"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-1/3"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-1/3"></div>
+        </div>
       </div>
       <div class="p-1 draggable cursor-move select-none" id="img">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       </div>
     </div>
-    <div class="col-span-5">
       <div
-          class="p-6 border border-dashed"
+          class="border border-dashed col-span-5"
           id="draggable-items-container"
       ></div>
       <div
           id="main-canvas"
           class="droppable min-h-full w-full border hidden"
       ></div>
-    </div>
-    <div class="flex flex-col col-span-2">
+
+    <div class="flex flex-col space-y-2 col-span-2">
       <div id="element" class="hidden"></div>
-      <input v-model="selected_element_classes" class="border border-green-500 outline-none p-2" type="text"
-             placeholder="Classes">
-      <input v-model="selected_element_inner_html" class="border border-green-500 outline-none p-2" type="text"
-             placeholder="innerHTML / value">
+      <textarea v-model="selected_element_classes" class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
+                placeholder="Classes"></textarea>
+      <textarea v-model="selected_element_inner_html" class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
+                placeholder="innerHTML / value"></textarea>
       <textarea class="border border-black hidden" v-model="selected_element_html" @keyup="element_html_change"
                 id="element-html"></textarea>
       <div>Margin</div>
@@ -133,9 +133,9 @@ import "jquery-ui/ui/widgets/draggable";
 import "jquery-ui/ui/widgets/droppable";
 import "jquery-ui/ui/widgets/sortable";
 import "jquery-ui/ui/widgets/resizable";
-import "jquery-ui/ui/widgets/tooltip";
+//import "jquery-ui/ui/widgets/tooltip";
 import "jquery-ui/themes/base/resizable.css";
-import "jquery-ui/themes/base/tooltip.css";
+//import "jquery-ui/themes/base/tooltip.css";
 import CodeMirror from "codemirror/lib/codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/selection/active-line";
@@ -152,6 +152,8 @@ import js_beautify from "js-beautify";
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 //import {javascript} from "@codemirror/lang-javascript"
 import {html} from "@codemirror/lang-html"
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 
 export default {
   name: "MainFrame",
@@ -244,18 +246,18 @@ export default {
       let element;
       if (self.dragging_element_name === "input") {
         element = document.createElement("input");
-        $(element).addClass("p-2 border rounded-md");
+        $(element).addClass("m-2 p-2 border rounded-md");
       } else if (self.dragging_element_name === "text") {
         element = document.createElement("p");
         $(element)
             .text("You have just dropped a text element. Edit text by selecting this element.")
-            .addClass("text-gray-700");
+            .addClass("p-2 m-2 text-gray-600");
       } else if (self.dragging_element_name === "button") {
         element = document.createElement("button");
         $(element)
-            .text("button")
-            .addClass("p-2 border rounded-md")
-            .attr('title', 'BUTTON Element')
+            .text("Button")
+            .addClass("m-2 bg-black text-white py-2 px-4 rounded-md")
+            //.attr('title', 'BUTTON Element')
       } else if (self.dragging_element_name === "img") {
         element = document.createElement("img");
         $(element)
@@ -265,7 +267,7 @@ export default {
         element = document.createElement("div");
         $(element)
             .addClass(
-                "flex flex-col gap-4 px-2 py-8 border-2 border-dashed border-indigo-500 droppable-flex-container"
+                "border-2 border-dashed border-green-200 m-2 p-2 flex flex-col gap-4 droppable-flex-container"
             )
             /* .droppable({
               accept: ".draggable",
@@ -281,7 +283,7 @@ export default {
             .sortable({
               greedy: true,
               cancel: false,
-              placeholder: "bg-red-200 p-2",
+              placeholder: "border-2 border-dashed border-red-400 m-2 p-4",
               //connectWith: ".connectedSortable"
               beforeStop: function (event, ui) {
 
@@ -345,6 +347,13 @@ export default {
         return false;
       });
 
+      tippy(element, {
+        content: $(element).prop('outerHTML'),
+        interactive: true,
+        trigger: 'click',
+        //hideOnClick: 'toggle',
+      });
+
       return element
     }
   },
@@ -370,7 +379,7 @@ export default {
       });
 
       $("#draggable-items-container").sortable({
-        placeholder: "border border-dotted p-4 bg-yellow-100",
+        placeholder: "border-2 border-dashed border-yellow-400 m-2 p-4",
         cancel: false,
         //accept: ".draggable",
         //revert: true,
@@ -615,11 +624,12 @@ export default {
         parent: document.getElementById('code-mirror-editor')
       })
 
-      $( document ).tooltip({
+      /*$( '#draggable-items-container' ).tooltip({
+        trigger : 'hover',
         classes: {
           "ui-tooltip": "bg-yellow-100 text-xs rounded-md border-none"
         },
-        /*position: {
+        position: {
           my: "center bottom-5",
           at: "center top",
           using: function( position, feedback ) {
@@ -630,8 +640,19 @@ export default {
                 .addClass( feedback.horizontal )
                 .appendTo( this );
           }
-        }*/
+        }
+      });*/
+
+      $("textarea").each(function () {
+        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+      }).on("input click", function () {
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
       });
+
+      /*tippy('#draggable-items-container', {
+        content: 'Drop elements here',
+      });*/
 
     });
   },
