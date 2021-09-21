@@ -1,20 +1,27 @@
 <template>
   <div class="flex items-center p-4 gap-4">
-    <h1 class="text-2xl font-medium text-gray-500">UI Builder for</h1>
+    <h1 class="lg:text-2xl font-medium text-gray-500">UI Builder for</h1>
     <img
         src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg"
         alt="TailwindCSS"
         class="h-6 w-auto"
     />
-    <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200" @click="clear_canvas" title="Clear Canvas">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
+            @click="clear_canvas" title="Clear Canvas">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-1" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
       </svg>
       Clear canvas
     </button>
-    <button class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white" @click="clear_canvas" title="Clear Canvas">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    <button
+        class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white"
+        @click="clear_canvas" title="Clear Canvas">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+           stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
       </svg>
       Get code
     </button>
@@ -24,9 +31,12 @@
     <div class="flex flex-col col-span-1" title="Drag Elements to canvas">
       <!-- <div class="draggable cursor-move select-none">Container</div> -->
       <div class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500" id="text">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-textarea-t" viewBox="0 0 16 16">
-          <path d="M1.5 2.5A1.5 1.5 0 0 1 3 1h10a1.5 1.5 0 0 1 1.5 1.5v3.563a2 2 0 0 1 0 3.874V13.5A1.5 1.5 0 0 1 13 15H3a1.5 1.5 0 0 1-1.5-1.5V9.937a2 2 0 0 1 0-3.874V2.5zm1 3.563a2 2 0 0 1 0 3.874V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V9.937a2 2 0 0 1 0-3.874V2.5A.5.5 0 0 0 13 2H3a.5.5 0 0 0-.5.5v3.563zM2 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-          <path d="M11.434 4H4.566L4.5 5.994h.386c.21-1.252.612-1.446 2.173-1.495l.343-.011v6.343c0 .537-.116.665-1.049.748V12h3.294v-.421c-.938-.083-1.054-.21-1.054-.748V4.488l.348.01c1.56.05 1.963.244 2.173 1.496h.386L11.434 4z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-textarea-t"
+             viewBox="0 0 16 16">
+          <path
+              d="M1.5 2.5A1.5 1.5 0 0 1 3 1h10a1.5 1.5 0 0 1 1.5 1.5v3.563a2 2 0 0 1 0 3.874V13.5A1.5 1.5 0 0 1 13 15H3a1.5 1.5 0 0 1-1.5-1.5V9.937a2 2 0 0 1 0-3.874V2.5zm1 3.563a2 2 0 0 1 0 3.874V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V9.937a2 2 0 0 1 0-3.874V2.5A.5.5 0 0 0 13 2H3a.5.5 0 0 0-.5.5v3.563zM2 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+          <path
+              d="M11.434 4H4.566L4.5 5.994h.386c.21-1.252.612-1.446 2.173-1.495l.343-.011v6.343c0 .537-.116.665-1.049.748V12h3.294v-.421c-.938-.083-1.054-.21-1.054-.748V4.488l.348.01c1.56.05 1.963.244 2.173 1.496h.386L11.434 4z"/>
         </svg>
         <span class="ml-2">TEXT</span>
       </div>
@@ -34,46 +44,85 @@
         <button class="bg-black text-white text-xs p-2 rounded-md">Button</button>
       </div>
       <div class="p-2 draggable cursor-move select-none" id="input">
-        <input placeholder="Write here" type="text" class="w-full text-xs border border-indigo-600 outline-none rounded p-2">
+        <input placeholder="Write here" type="text"
+               class="w-full text-xs border border-indigo-600 outline-none rounded p-2">
       </div>
       <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
       <div class="p-2 draggable cursor-move select-none" id="flex">
         <div class="w-full p-2 inline-flex space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-1/3"></div>
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-1/3"></div>
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-1/3"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
         </div>
       </div>
       <div class="p-1 draggable cursor-move select-none" id="img">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
         </svg>
       </div>
     </div>
-      <div
-          class="border border-dashed col-span-5"
-          id="draggable-items-container"
-      ></div>
-      <div
-          id="main-canvas"
-          class="droppable min-h-full w-full border hidden"
-      ></div>
+    <div
+        class="border border-dashed col-span-5"
+        id="draggable-items-container"
+    ></div>
+    <div
+        id="main-canvas"
+        class="droppable min-h-full w-full border hidden"
+    ></div>
 
     <div class="flex flex-col space-y-2 col-span-2">
+      <button class="border border-green-400" @click="duplicate_element">Duplicate element</button>
+      <button class="bg-red-500 text-white" @click="delete_element">Delete element</button>
+      <button class="bg-gray-400 text-black" @click="delete_element">Remove border & ring</button>
       <div id="element" class="hidden"></div>
-      <textarea v-model="selected_element_classes" class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
+      <textarea v-model="selected_element_classes"
+                class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
                 placeholder="Classes"></textarea>
-      <textarea v-model="selected_element_inner_html" class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
-                placeholder="innerHTML / value"></textarea>
+      <textarea v-model="selected_element_inner_html"
+                class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
+                placeholder="HTML / Value"></textarea>
       <textarea class="border border-black hidden" v-model="selected_element_html" @keyup="element_html_change"
                 id="element-html"></textarea>
-      <div>Margin</div>
-      <select @change="add_class" id="m">
-        <option>m-0</option>
-        <option>m-1</option>
-        <option>m-24</option>
-        <option>m-3</option>
-      </select>
+
+      <div>
+        Flex
+        <select @change="add_class" id="flex-row-or-col">
+          <option>flex-row</option>
+          <option>flex-col</option>
+        </select>
+      </div>
+
+      <div>
+        Attributes
+      </div>
+      <div class="grid grid-cols-4 gap-2">
+        <p class="col-span-4">Margin</p>
+        <select class="appearance-none" @change="add_class" id="m">
+          <option>m-0</option>
+          <option>m-1</option>
+          <option>m-2</option>
+          <option>m-3</option>
+        </select>
+        <select @change="add_class" id="m">
+          <option>m-0</option>
+          <option>m-1</option>
+          <option>m-2</option>
+          <option>m-3</option>
+        </select>
+        <select @change="add_class" id="m">
+          <option>m-0</option>
+          <option>m-1</option>
+          <option>m-2</option>
+          <option>m-3</option>
+        </select>
+        <select @change="add_class" id="m">
+          <option>m-0</option>
+          <option>m-1</option>
+          <option>m-2</option>
+          <option>m-3</option>
+        </select>
+      </div>
       <div>Padding</div>
       <select @change="add_class" id="p">
         <option>p-0</option>
@@ -81,18 +130,34 @@
         <option>p-2</option>
         <option>p-3</option>
       </select>
-      <div>Border</div>
+      <div>
+        Border
+        <select @change="add_class" id="border-color">
+          <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
+        </select>
+      </div>
+      <div>
+        Ring
+        <select @change="add_class" id="ring-color">
+          <option v-for="ring_color in ring_colors" :key="ring_color">{{ ring_color }}</option>
+        </select>
+      </div>
       <div>Width - Height</div>
+      <select @change="add_class" id="w">
+        <option v-for="w in widths" :key="w">{{ w }}</option>
+      </select>
       <div>Alignment</div>
       <div>Background color
         <select @change="add_class" id="bg">
-          <option value="" selected>Not selected</option>
-          <option>bg-green-300</option>
-          <option>bg-indigo-300</option>
-          <option>bg-red-400</option>
+          <option v-for="bg_color in bg_colors" :key="bg_color">{{ bg_color }}</option>
         </select>
       </div>
-      <div>Text color</div>
+      <div>
+        Text color
+        <select @change="add_class" id="text-color">
+          <option v-for="text_color in text_colors" :key="text_color">{{ text_color }}</option>
+        </select>
+      </div>
       <div>Text size</div>
       <div>Shadow</div>
       <div>Radius</div>
@@ -100,22 +165,6 @@
       <div>
         Float
       </div>
-      <div>
-        Flex
-
-        <div class="p-4 inline-flex space-x-4 bg-indigo-50 bg-stripes bg-stripes-white rounded-md">
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-6 py-4">1</div>
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-6 py-4">2</div>
-          <div class="flex-1 rounded-md text-white font-extrabold text-center bg-indigo-500 px-6 py-4">3</div>
-        </div>
-
-        <select>
-          <option>flex-row</option>
-          <option>flex-col</option>
-        </select>
-      </div>
-      <button class="border border-green-400" @click="duplicate_element">Duplicate element</button>
-      <button class="bg-red-500 text-white" @click="delete_element">Delete element</button>
     </div>
   </div>
   <div id="code-mirror-editor"></div>
@@ -125,6 +174,80 @@
       id="code-editor"
   ></pre>
   <div class="border rounded-md m-6 hidden" id="code_editor"></div>
+  <div id="template" class="hidden">
+    <strong>Bolded content</strong>
+  </div>
+
+  <div>
+    <button
+        type="button"
+        @click="openModal"
+        class="px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+    >
+      Open dialog
+    </button>
+  </div>
+  <TransitionRoot appear :show="isOpen" as="template">
+    <Dialog as="div" @close="closeModal">
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="min-h-screen px-4 text-center">
+          <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0"
+              enter-to="opacity-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100"
+              leave-to="opacity-0"
+          >
+            <DialogOverlay class="fixed inset-0" />
+          </TransitionChild>
+
+          <span class="inline-block h-screen align-middle" aria-hidden="true">
+            &#8203;
+          </span>
+
+          <TransitionChild
+              as="template"
+              enter="duration-300 ease-out"
+              enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100"
+              leave="duration-200 ease-in"
+              leave-from="opacity-100 scale-100"
+              leave-to="opacity-0 scale-95"
+          >
+            <div
+                class="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl"
+            >
+              <DialogTitle
+                  as="h3"
+                  class="text-lg font-medium leading-6 text-gray-900"
+              >
+                Payment successful
+              </DialogTitle>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  Your payment has been successfully submitted. We’ve sent you
+                  an email with all of the details of your order.
+                </p>
+              </div>
+
+              <div class="mt-4">
+                <button
+                    type="button"
+                    class="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    @click="closeModal"
+                >
+                  Got it, thanks!
+                </button>
+              </div>
+            </div>
+          </TransitionChild>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
+
 </template>
 
 <script>
@@ -152,10 +275,36 @@ import js_beautify from "js-beautify";
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 //import {javascript} from "@codemirror/lang-javascript"
 import {html} from "@codemirror/lang-html"
-import tippy from 'tippy.js';
+//import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
+import { ref } from "vue";
+import {
+  Dialog,
+  DialogOverlay,
+  DialogTitle,
+  TransitionRoot,
+  TransitionChild,
+} from "@headlessui/vue";
+
 export default {
+
+  components: { Dialog, DialogOverlay, DialogTitle, TransitionRoot, TransitionChild },
+  setup() {
+    const isOpen = ref(false)
+
+    return {
+      isOpen,
+
+      closeModal() {
+        isOpen.value = false
+      },
+      openModal() {
+        isOpen.value = true
+      },
+    }
+  },
+
   name: "MainFrame",
   data() {
     return {
@@ -165,7 +314,35 @@ export default {
       selected_element: null,
       selected_element_html: "",
       selected_element_inner_html: "",
-      selected_element_classes: ""
+      selected_element_classes: "",
+      widths: ["w-0", "w-px", "w-0.5", "w-1", "w-1.5", "w-2", "w-2.5", "w-3", "w-3.5", "w-4",
+        "w-5", "w-6", "w-7", "w-8", "w-9", "w-10", "w-11", "w-12", "w-14", "w-16", "w-20",
+        "w-24", "w-28", "w-32", "w-36", "w-40", "w-44", "w-48", "w-52", "w-56", "w-60", "w-64",
+        "w-72", "w-80", "w-96", "w-auto", "w-1/2", "w-1/3", "w-2/3", "w-1/4", "w-2/4", "w-3/4",
+        "w-1/5", "w-2/5", "w-3/5", "w-4/5", "w-1/6", "w-2/6", "w-3/6", "w-4/6", "w-5/6", "w-1/12",
+        "w-2/12", "w-3/12", "w-4/12", "w-5/12", "w-6/12", "w-7/12", "w-8/12", "w-9/12", "w-10/12",
+        "w-11/12", "w-full", "w-screen", "w-min", "w-max"
+      ],
+      bg_colors: [
+        "bg-transparent", "bg-current", "bg-black", "bg-white",
+        "bg-gray-50", "bg-red-50", "bg-yellow-50", "bg-green-50",
+        "bg-blue-50", "bg-indigo-50", "bg-purple-50", "bg-pink-50",
+      ],
+      text_colors: [
+        "text-transparent", "text-current", "text-black", "text-white",
+        "text-gray-500", "text-red-500", "text-yellow-500", "text-green-500",
+        "text-blue-500", "text-indigo-500", "text-purple-500", "text-pink-500",
+      ],
+      border_colors: [
+        "border-transparent", "border-current", "border-black", "border-white",
+        "border-gray-500", "border-red-500", "border-yellow-500", "border-green-500",
+        "border-blue-500", "border-indigo-500", "border-purple-500", "border-pink-500",
+      ],
+      ring_colors: [
+        "ring-transparent", "ring-current", "ring-black", "ring-white",
+        "ring-gray-500", "ring-red-500", "ring-yellow-500", "ring-green-500",
+        "ring-blue-500", "ring-indigo-500", "ring-purple-500", "ring-pink-500",
+      ]
     };
   },
   methods: {
@@ -181,7 +358,7 @@ export default {
       let style_to_apply = $(event.currentTarget).attr("id");
 
       if (style_to_apply === "p") {
-        classes = classes.replace(/p-\d+/gim, class_to_add);
+        classes = classes.replace(/(^|\s)p-\d+/gim, class_to_add);
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
@@ -193,7 +370,37 @@ export default {
           classes += " " + class_to_add + " ";
         }
       } else if (style_to_apply === "bg") {
-        classes = classes.replace(/bg-\w+-\d+/gim, class_to_add);
+        classes = classes.replace(/bg-\w+(-\d+)?/gim, class_to_add);
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      } else if (style_to_apply === "text-color") {
+        classes = classes.replace(/(^|\s)text-\w+-\d+/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      } else if (style_to_apply === "border-color") {
+        classes = classes.replace(/(^|\s)border-\w+-\d+/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      } else if (style_to_apply === "ring-color") {
+        classes = classes.replace(/(^|\s)ring-\w+-\d+/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      } else if (style_to_apply === "flex-row-or-col") {
+        classes = classes.replace(/(^|\s)flex-(col|row)/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      } else if (style_to_apply === "w") {
+        classes = classes.replace(/(^|\s)w-\d+(\/?\d)?/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
@@ -257,7 +464,7 @@ export default {
         $(element)
             .text("Button")
             .addClass("m-2 bg-black text-white py-2 px-4 rounded-md")
-            //.attr('title', 'BUTTON Element')
+        //.attr('title', 'BUTTON Element')
       } else if (self.dragging_element_name === "img") {
         element = document.createElement("img");
         $(element)
@@ -326,11 +533,12 @@ export default {
 
       //$(this).append(this.create_dropped_element(self.dragging_element_name)); //element
       $(element).contextmenu(function () {
-        alert('Apply style')
+        //alert('Apply style')
         /* self.selected_element = $(e.target)
         console.log("right clicked", $(e.target).attr("class"));
         $("#element").text( $(e.target).prop('tagName') )
         */
+        self.isOpen = true
         return false;
       });
 
@@ -347,12 +555,14 @@ export default {
         return false;
       });
 
-      tippy(element, {
-        content: $(element).prop('outerHTML'),
+      /*tippy(element, {
+        //content: $(element).prop('outerHTML'),
+        content: $('#template').html(),
         interactive: true,
         trigger: 'click',
+        allowHTML: true,
         //hideOnClick: 'toggle',
-      });
+      });*/
 
       return element
     }
@@ -616,6 +826,7 @@ export default {
             EditorView.updateListener.of((v) => {
               if (v.docChanged) {
                 //console.log(v.state.doc.toString());
+                //$('#draggable-items-container').html(v.state.doc.toString())
               }
             })
           ],
@@ -658,24 +869,20 @@ export default {
   },
   watch: {
     selected_element() {
-      if($(this.selected_element).prop("tagName") === 'INPUT'){
+      if ($(this.selected_element).prop("tagName") === 'INPUT') {
         this.selected_element_inner_html = $(this.selected_element).val()
-      }
-      else if($(this.selected_element).prop("tagName") === 'IMG'){
+      } else if ($(this.selected_element).prop("tagName") === 'IMG') {
         this.selected_element_inner_html = $(this.selected_element).attr('src')
-      }
-      else{
+      } else {
         this.selected_element_inner_html = $(this.selected_element).html()
       }
     },
     selected_element_inner_html() {
-      if($(this.selected_element).prop("tagName") === 'INPUT'){
+      if ($(this.selected_element).prop("tagName") === 'INPUT') {
         $(this.selected_element).val(this.selected_element_inner_html)
-      }
-      else if($(this.selected_element).prop("tagName") === 'IMG'){
+      } else if ($(this.selected_element).prop("tagName") === 'IMG') {
         $(this.selected_element).attr('src', this.selected_element_inner_html)
-      }
-      else{
+      } else {
         $(this.selected_element).html(this.selected_element_inner_html)
       }
     },
