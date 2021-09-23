@@ -1,36 +1,47 @@
 <template>
-  <div class="flex items-center p-4 gap-4">
-    <h1 class="lg:text-2xl font-medium text-gray-500">UI Builder for</h1>
-    <img
-        alt="TailwindCSS"
-        class="h-6 w-auto"
-        src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg"
-    />
-    <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
-            title="Clear Canvas" @click="clear_canvas">
-      <svg class="h-5 w-5 text-red-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-           xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-            stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2"/>
-      </svg>
-      Clear canvas
-    </button>
-    <button
-        class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white"
-        title="Clear Canvas" @click="clear_canvas">
-      <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-           xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round"
+  <div class="flex flex-col lg:flex-row p-6 gap-4 lg:justify-between">
+    <div class="flex space-x-2 justify-center items-center">
+      <h1 class="lg:text-2xl font-medium text-gray-500">UI Builder for</h1>
+      <img
+          alt="TailwindCSS"
+          class="h-6 w-auto"
+          src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg"
+      />
+    </div>
+    <div class="flex flex-row space-x-2 justify-center">
+      <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
+              title="Clear Canvas" @click="clear_canvas">
+        <svg class="h-5 w-5 text-red-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              stroke-linecap="round" stroke-linejoin="round"
               stroke-width="2"/>
-      </svg>
-      Get code
-    </button>
-    <!-- <button @click="clear_canvas">Preview</button>-->
+        </svg>
+        Clear canvas
+      </button>
+      <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
+              title="Preview" @click="clear_canvas">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 16 16">
+          <path d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z"/>
+        </svg>
+        Preview
+      </button>
+      <button
+          class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white"
+          title="Clear Canvas" @click="clear_canvas">
+        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2"/>
+        </svg>
+         Code
+      </button>
+      <!-- <button @click="clear_canvas">Preview</button>-->
+    </div>
   </div>
-  <div class="grid grid-cols-8 gap-4">
-    <div class="flex flex-col col-span-1" title="Drag Elements to canvas">
+  <div class="grid grid-cols-8">
+    <div class="flex flex-col col-span-8 lg:col-span-1 p-2 bg-gray-50" title="Drag Elements to canvas">
       <!-- <div class="draggable cursor-move select-none">Container</div> -->
       <div id="text" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
         <svg class="bi bi-textarea-t" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
@@ -51,10 +62,11 @@
       </div>
       <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
       <div id="flex" class="p-2 draggable cursor-move select-none">
-        <div class="w-full p-2 inline-flex space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
+        <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <span class="text-xs text-gray-500">Container</span>
+          <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
         </div>
       </div>
       <div id="img" class="p-1 draggable cursor-move select-none">
@@ -68,26 +80,43 @@
     </div>
     <div
         id="draggable-items-container"
-        class="border border-dashed col-span-5"
+        class="border border-dashed col-span-8 lg:col-span-5"
     ></div>
     <div
         id="main-canvas"
         class="droppable min-h-full w-full border hidden"
     ></div>
 
-    <div class="flex flex-col space-y-2 col-span-2 overflow-y-auto h-screen">
-      <div class="flex flex-row">
-        <button class="border border-green-400" @click="duplicate_element">Duplicate element</button>
-        <button class="bg-red-500 text-white" @click="delete_element">Delete element</button>
-        <button class="bg-gray-400 text-black" @click="delete_element">Remove border & ring</button>
+    <div class="px-4 flex flex-col space-y-4 col-span-8 lg:col-span-2">
+      <div class="border border-gray-300 divide-x divide-gray-500 flex items-center space-x-2 p-2 rounded-md">
+        <button @click="duplicate_element">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+        </button>
+        <button class="pl-2" @click="delete_element">
+          <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2"/>
+          </svg>
+        </button>
+        <button class="pl-2" @click="remove_frame_border">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </button>
       </div>
       <div id="element" class="hidden"></div>
       <textarea v-model="selected_element_classes"
-                class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
-                placeholder="Classes"></textarea>
+                class="resize-none border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
+                >Classes</textarea>
       <textarea v-model="selected_element_inner_html"
-                class="resize-none border border-green-500 outline-none p-2 rounded-md mx-2"
-                placeholder="HTML / Value"></textarea>
+                class="resize-none border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
+                >HTML / Value</textarea>
       <textarea id="element-html" v-model="selected_element_html" class="border border-black hidden"
                 @keyup="element_html_change"></textarea>
       <div>
@@ -323,8 +352,8 @@ export default {
       code_editor: null,
       selected_element: null,
       selected_element_html: "",
-      selected_element_inner_html: "",
-      selected_element_classes: "",
+      selected_element_inner_html: "HTML",
+      selected_element_classes: "Classes",
 
       margins: [
         "m-0", "m-px", "m-0.5", "m-1", "m-1.5", "m-2", "m-2.5", "m-3", "m-3.5", "m-4", "m-5",
@@ -623,6 +652,13 @@ export default {
         "border-gray-500", "border-red-500", "border-yellow-500", "border-green-500",
         "border-blue-500", "border-indigo-500", "border-purple-500", "border-pink-500",
       ],
+      border_width: [
+        "border-0", "border-2", "border-4", "border-8", "border", "border-t-0",
+        "border-t-2", "border-t-4", "border-t-8", "border-t	", "border-r-0	",
+        "border-r-2", "border-r-4", "border-r-8", "border-r", "border-b-0",
+        "border-b-2", "border-b-4", "border-b-8", "border-b", "border-l-0", "border-l-2", "border-l-4",
+        "border-l-8", "border-l",
+      ],
       border_radiuses: [
         "rounded-none", "rounded-sm", "rounded", "rounded-md", "rounded-lg",
         "rounded-xl", "rounded-2xl", "rounded-3xl", "rounded-full", "rounded-t-none",
@@ -760,6 +796,9 @@ export default {
     delete_element: function () {
       $(this.selected_element).remove()
     },
+    remove_frame_border(){
+      $(this.selected_element).removeClass('container-frame')
+    },
     create_dropped_element() {
       let self = this
 
@@ -787,7 +826,7 @@ export default {
         element = document.createElement("div");
         $(element)
             .addClass(
-                "border-2 border-dashed border-green-200 m-2 p-2 flex flex-col gap-4 droppable-flex-container"
+                "container-frame m-2 p-2 flex flex-col gap-4 droppable-flex-container"
             )
             /* .droppable({
               accept: ".draggable",
@@ -803,7 +842,7 @@ export default {
             .sortable({
               greedy: true,
               cancel: false,
-              placeholder: "border-2 border-dashed border-red-400 m-2 p-4",
+              placeholder: "container-frame",
               //connectWith: ".connectedSortable"
               beforeStop: function (event, ui) {
 
