@@ -22,8 +22,10 @@
       </button>
       <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
               title="Preview" @click="clear_canvas">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 16 16">
-          <path d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 16 16">
+          <path
+              d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z"/>
         </svg>
         Preview
       </button>
@@ -35,7 +37,7 @@
           <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2"/>
         </svg>
-         Code
+        Code
       </button>
       <!-- <button @click="clear_canvas">Preview</button>-->
     </div>
@@ -77,6 +79,22 @@
               stroke-width="2"/>
         </svg>
       </div>
+      <div id="table" class="p-2 draggable cursor-move select-none">
+        <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <span class="text-xs text-gray-500">Table</span>
+          <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
+        </div>
+      </div>
+      <div id="list" class="p-2 draggable cursor-move select-none">
+        <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <span class="text-xs text-gray-500">List</span>
+          <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
+        </div>
+      </div>
     </div>
     <div
         id="draggable-items-container"
@@ -91,7 +109,8 @@
       <div class="border border-gray-300 divide-x divide-gray-500 flex items-center space-x-2 p-2 rounded-md">
         <button @click="duplicate_element">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
           </svg>
         </button>
         <button class="pl-2" @click="delete_element">
@@ -104,30 +123,67 @@
           </svg>
         </button>
         <button class="pl-2" @click="remove_frame_border">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square"
+               viewBox="0 0 16 16">
+            <path
+                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
           </svg>
         </button>
       </div>
       <div id="element" class="hidden"></div>
       <textarea v-model="selected_element_classes"
                 class="resize-none border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
-                >Classes</textarea>
-      <textarea v-model="selected_element_inner_html"
-                class="resize-none border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
-                >HTML / Value</textarea>
+                placeholder="Classes"></textarea>
+      <input type="text" v-model="selected_element_inner_html"
+             class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
+             placeholder="HTML">
       <textarea id="element-html" v-model="selected_element_html" class="border border-black hidden"
                 @keyup="element_html_change"></textarea>
-      <div>
+      <!-- <div>
         Attributes
-      </div>
-      <div>
-        Flex
-        <select id="flex-row-or-col" @change="add_class">
-          <option>flex-row</option>
-          <option>flex-col</option>
-        </select>
+      </div>-->
+      <div id="flex-style" class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Flex</h3>
+
+        <div>
+          <button data-template="flex-direction" class="w-full p-2 hover:bg-indigo-50 properties">Flex direction</button>
+        </div>
+        <div class="hidden">
+          <div id="flex-direction">
+          <div class="flex flex-col divide-y space-y-2">
+            <div class="flex flex-row bg-indigo-50 w-72 border rounded p-1">
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
+            </div>
+            <div class="flex flex-row-reverse bg-indigo-50 w-72 border rounded p-1">
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
+            </div>
+            <div class="flex flex-col bg-indigo-50 w-72 border rounded p-1">
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
+            </div>
+            <div class="flex flex-col-reverse bg-indigo-50 w-72 border rounded p-1">
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
+              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
+            </div>
+          </div>
+            </div>
+        </div>
+
+          <button data-template="justify-content" class="p-2 hover:bg-indigo-100">Justify Content</button>
+          <!--        <select id="flex-row-or-col" @change="add_class">
+                    <option>
+                      flex-row
+                    </option>
+                    <option>flex-col</option>
+                  </select>-->
       </div>
       <div class="grid grid-cols-4 gap-2">
         <p class="col-span-4">Margin</p>
@@ -314,8 +370,10 @@ import js_beautify from "js-beautify";
 import {EditorState, EditorView, basicSetup} from "@codemirror/basic-setup"
 //import {javascript} from "@codemirror/lang-javascript"
 import {html} from "@codemirror/lang-html"
-//import tippy from 'tippy.js';
+//import tippy from 'tippy.js/headless/dist/tippy-headless.cjs';
+import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light-border.css'
 
 import {ref} from "vue";
 import {
@@ -328,7 +386,13 @@ import {
 
 export default {
 
-  components: {Dialog, DialogOverlay, DialogTitle, TransitionRoot, TransitionChild},
+  components: {
+    Dialog,
+    DialogOverlay,
+    DialogTitle,
+    TransitionRoot,
+    TransitionChild,
+  },
   setup() {
     const isOpen = ref(false)
 
@@ -341,6 +405,73 @@ export default {
       openModal() {
         isOpen.value = true
       },
+
+      solutions: [
+        {
+          name: 'Insights',
+          description: 'Measure actions your users take',
+          href: '##',
+          icon: `
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              aria-hidden='true'
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="48" height="48" rx="8" fill="#FFEDD5" />
+              <path
+                d="M24 11L35.2583 17.5V30.5L24 37L12.7417 30.5V17.5L24 11Z"
+                stroke="#FB923C"
+                stroke-width="2"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M16.7417 19.8094V28.1906L24 32.3812L31.2584 28.1906V19.8094L24 15.6188L16.7417 19.8094Z"
+                stroke="#FDBA74"
+                stroke-width="2"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M20.7417 22.1196V25.882L24 27.7632L27.2584 25.882V22.1196L24 20.2384L20.7417 22.1196Z"
+                stroke="#FDBA74"
+                stroke-width="2"
+              />
+            </svg>
+          `,
+        },
+        {
+          name: 'Automations',
+          description: 'Create your own targeted content',
+          href: '##',
+          icon: `
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="48" height="48" rx="8" fill="#FFEDD5" />
+              <path
+                d="M28.0413 20L23.9998 13L19.9585 20M32.0828 27.0001L36.1242 34H28.0415M19.9585 34H11.8755L15.9171 27"
+                stroke="#FB923C"
+                stroke-width="2"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18.804 30H29.1963L24.0001 21L18.804 30Z"
+                stroke="#FDBA74"
+                stroke-width="2"
+              />
+            </svg>
+          `,
+        },
+      ]
     }
   },
 
@@ -352,8 +483,8 @@ export default {
       code_editor: null,
       selected_element: null,
       selected_element_html: "",
-      selected_element_inner_html: "HTML",
-      selected_element_classes: "Classes",
+      selected_element_inner_html: "",
+      selected_element_classes: "",
 
       margins: [
         "m-0", "m-px", "m-0.5", "m-1", "m-1.5", "m-2", "m-2.5", "m-3", "m-3.5", "m-4", "m-5",
@@ -691,10 +822,16 @@ export default {
         "box-shadow", "shadow-md", "box-shadow", "shadow-lg", "box-shadow",
         "shadow-xl", "box-shadow", "shadow-2xl", "box-shadow", "shadow-inner",
         "box-shadow", "shadow-none"
+      ],
+      flexes: [
+        "flex-row", "flex-row-reverse", "flex-col", "flex-col-reverse"
       ]
     };
   },
   methods: {
+    apply_style(){
+      console.log('apply style')
+    },
     add_class(event) {
       if (this.selected_element === null) {
         alert("To apply designs select one element by right clicking.");
@@ -796,7 +933,7 @@ export default {
     delete_element: function () {
       $(this.selected_element).remove()
     },
-    remove_frame_border(){
+    remove_frame_border() {
       $(this.selected_element).removeClass('container-frame')
     },
     create_dropped_element() {
@@ -1213,10 +1350,53 @@ export default {
         this.style.height = (this.scrollHeight) + "px";
       });
 
-      /*tippy('#draggable-items-container', {
-        content: 'Drop elements here',
-      });*/
+      tippy('.properties', {
+        //content: 'Drop elements here',
+        trigger: 'click mouseover',
+        content(reference) {
+          const id = reference.getAttribute('data-template');
+          const template = document.getElementById(id);
+          return template.innerHTML;
+        },
+        theme: 'light-border',
+        allowHTML: true,
+        arrow: false,
+        interactive: true,
+        placement: 'left',
+        /*onCreate(instance) {
+          // Setup our own custom state properties
+          /!*instance._isFetching = false;
+          instance._src = null;
+          instance._error = null;*!/
+          console.log(instance)
+        },*/
+        onShow(instance) {
 
+          //instance.setContent("onShow")
+          //console.log(instance.reference.id)
+
+          /*if (instance._isFetching || instance._src || instance._error) {
+            return;
+          }*/
+
+          /*let element
+          element = document.createElement("div");
+          $(element).addClass("m-2 p-2 border rounded-md").text(instance.reference.id)
+          .click(function(){
+            console.log('click')
+          })*/
+
+          //instance.setContent(element)
+
+          $(instance).click(function(){
+            alert('click')
+          })
+        }
+      });
+
+      $(document).click(function(e){
+        console.log('docs click', e.target)
+      });
     });
   },
   watch: {
