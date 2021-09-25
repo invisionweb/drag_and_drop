@@ -95,6 +95,14 @@
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
         </div>
       </div>
+      <div id="add-element" class="p-2 draggable cursor-move select-none">
+        <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6">+</div>
+          <span class="text-xs text-gray-500">Element</span>
+          <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
+        </div>
+      </div>
     </div>
     <div
         id="draggable-items-container"
@@ -191,7 +199,7 @@
         <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
-            <select id="m" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select id="m" @change="add_class" class="appearance-none bg-white text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="margin in margins" :key="margin">{{ margin }}</option>
             </select>
           </div>
@@ -216,80 +224,271 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-4 gap-2">
-        <p class="col-span-4">Margin</p>
-        <select id="m" @change="add_class">
-          <option v-for="margin in margins" :key="margin">{{ margin }}</option>
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Padding</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Border</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
+            <select id="border-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Width & Height</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Width</label>
+            <select id="w" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="width in widths" :key="width">{{ width }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Height</label>
+            <select id="h" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="height in heights" :key="height">{{ height }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Ring</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
+            <select id="ring-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="ring_color in ring_colors" :key="ring_color">{{ ring_color }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Ring</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
+            <select id="ring-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="ring_color in ring_colors" :key="ring_color">{{ ring_color }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Position</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
+            <select id="border-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/2">
+            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
+            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Background</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
+            <select id="text-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in bg_colors" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Size</label>
+            <select id="text-size" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Font</label>
+            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
+            <select id="font-weight" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="pading in font_weights" :key="pading">{{ pading }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <label class="text-xs font-semibold text-gray-500 my-1">Shadow</label>
+        <select id="font-weight" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+          <option v-for="pading in shadows" :key="pading">{{ pading }}</option>
         </select>
       </div>
-      <div>Padding</div>
-      <select id="p" @change="add_class">
-        <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-      </select>
-      <div>
-        Border
-        <select id="border-color" @change="add_class">
-          <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
+      <div class="flex flex-col">
+        <label class="text-xs font-semibold text-gray-500 my-1">Radius</label>
+        <select id="font-weight" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+          <option v-for="pading in border_radiuses" :key="pading">{{ pading }}</option>
         </select>
-      </div>
-      <div>
-        Ring
-        <select id="ring-color" @change="add_class">
-          <option v-for="ring_color in ring_colors" :key="ring_color">{{ ring_color }}</option>
-        </select>
-      </div>
-      <div>Width - Height</div>
-      <select id="w" @change="add_class">
-        <option v-for="w in widths" :key="w">{{ w }}</option>
-      </select>
-      <select id="h" @change="add_class">
-        <option v-for="h in heights" :key="h">{{ h }}</option>
-      </select>
-      <div>Alignment</div>
-      <div>Background color
-        <select id="bg" @change="add_class">
-          <option v-for="bg_color in bg_colors" :key="bg_color">{{ bg_color }}</option>
-        </select>
-      </div>
-      <div>
-        Text color
-        <select id="text-color" @change="add_class">
-          <option v-for="text_color in text_colors" :key="text_color">{{ text_color }}</option>
-        </select>
-      </div>
-      <div>
-        Text size
-        <select id="text-size" @change="add_class">
-          <option v-for="text_size in text_sizes" :key="text_size">{{ text_size }}</option>
-        </select>
-      </div>
-      <div>
-        Font family
-        <select id="font-family" @change="add_class">
-          <option v-for="font_family in font_families" :key="font_family">{{ font_family }}</option>
-        </select>
-      </div>
-      <div>
-        Font weight
-        <select id="font-weight" @change="add_class">
-          <option v-for="font_weight in font_weights" :key="font_weight">{{ font_weight }}</option>
-        </select>
-      </div>
-      <div>
-        Shadow
-        <select id="shadow" @change="add_class">
-          <option v-for="shadow in shadows" :key="shadow">{{ shadow }}</option>
-        </select>
-      </div>
-      <div>
-        Radius
-        <select id="border-radiuses" @change="add_class">
-          <option v-for="border_radius in border_radiuses" :key="border_radius">{{ border_radius }}</option>
-        </select>
-      </div>
-      <div>Position</div>
-      <div>
-        Float
       </div>
     </div>
   </div>
