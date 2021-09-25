@@ -152,7 +152,7 @@
         </div>
         <div class="hidden">
           <div id="flex-direction">
-          <div class="flex flex-col divide-y space-y-2">
+          <div class="flex flex-col divide-y space-y-2 my-1">
             <div class="flex flex-row bg-indigo-50 w-72 border rounded p-1">
               <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
               <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
@@ -185,6 +185,37 @@
                     <option>flex-col</option>
                   </select>-->
       </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Margin</h3>
+        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="m" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="margin in margins" :key="margin">{{ margin }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <select id="mr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="margin in margins" :key="margin">{{ margin }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <select id="mb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="margin in margins" :key="margin">{{ margin }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <select id="ml" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="margin in margins" :key="margin">{{ margin }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div class="grid grid-cols-4 gap-2">
         <p class="col-span-4">Margin</p>
         <select id="m" @change="add_class">
