@@ -31,7 +31,7 @@
       </button>
       <button
           class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white"
-          title="Clear Canvas" @click="clear_canvas">
+          title="Clear Canvas" @click="show_code_mirror = !show_code_mirror">
         <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
              xmlns="http://www.w3.org/2000/svg">
           <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round"
@@ -42,6 +42,7 @@
       <!-- <button @click="clear_canvas">Preview</button>-->
     </div>
   </div>
+  <div class="m-4" :class="{ hidden: !show_code_mirror}" id="code-mirror-editor"></div>
   <div class="grid grid-cols-8">
     <div class="flex flex-col col-span-8 lg:col-span-1 p-2 bg-gray-50" title="Drag Elements to canvas">
       <!-- <div class="draggable cursor-move select-none">Container</div> -->
@@ -492,7 +493,6 @@
       </div>
     </div>
   </div>
-  <div id="code-mirror-editor"></div>
   <pre
       id="code-editor"
       class="hidden overflow-x-auto mx-auto my-8 outline-none max-w-4xl border resize font-mono text-sm p-2"
@@ -503,15 +503,6 @@
     <strong>Bolded content</strong>
   </div>
 
-  <div>
-    <button
-        class="px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        type="button"
-        @click="openModal"
-    >
-      Open dialog
-    </button>
-  </div>
   <TransitionRoot :show="isOpen" appear as="template">
     <Dialog as="div" @close="closeModal">
       <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -544,16 +535,15 @@
             <div
                 class="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl"
             >
-              <DialogTitle
+<!--              <DialogTitle
                   as="h3"
                   class="text-lg font-medium leading-6 text-gray-900"
               >
                 Payment successful
-              </DialogTitle>
+              </DialogTitle>-->
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
-                  Your payment has been successfully submitted. We’ve sent you
-                  an email with all of the details of your order.
+                  To apply designs select one element inside the canvas.
                 </p>
               </div>
 
@@ -563,7 +553,7 @@
                     type="button"
                     @click="closeModal"
                 >
-                  Got it, thanks!
+                  Got it
                 </button>
               </div>
             </div>
@@ -609,7 +599,7 @@ import {ref} from "vue";
 import {
   Dialog,
   DialogOverlay,
-  DialogTitle,
+  //DialogTitle,
   TransitionRoot,
   TransitionChild,
 } from "@headlessui/vue";
@@ -619,7 +609,7 @@ export default {
   components: {
     Dialog,
     DialogOverlay,
-    DialogTitle,
+    //DialogTitle,
     TransitionRoot,
     TransitionChild,
   },
@@ -715,6 +705,7 @@ export default {
       selected_element_html: "",
       selected_element_inner_html: "",
       selected_element_classes: "",
+      show_code_mirror: false,
 
       margins: [
         "m-0", "m-px", "m-0.5", "m-1", "m-1.5", "m-2", "m-2.5", "m-3", "m-3.5", "m-4", "m-5",
@@ -1064,7 +1055,8 @@ export default {
     },
     add_class(event) {
       if (this.selected_element === null) {
-        alert("To apply designs select one element by right clicking.");
+        //alert("To apply designs select one element by right clicking.");
+        this.openModal()
         return;
       }
 
