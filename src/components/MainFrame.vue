@@ -113,7 +113,7 @@
         class="droppable min-h-full w-full border hidden"
     ></div>
 
-    <div class="px-4 flex flex-col space-y-4 col-span-8 lg:col-span-2">
+    <div class="px-4 pb-4 flex flex-col space-y-4 col-span-8 lg:col-span-2">
       <div class="border border-gray-300 divide-x divide-gray-500 flex items-center space-x-2 p-2 rounded-md">
         <button @click="duplicate_element">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -196,7 +196,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Margin</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="m" @change="add_class" class="appearance-none bg-white text-xs border border-gray-300 px-2 py-1 w-full">
@@ -226,7 +226,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Padding</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -256,7 +256,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Border</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -282,7 +282,7 @@
             </select>
           </div>
         </div>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="border-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -300,7 +300,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Width & Height</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Width</label>
             <select id="w" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -318,7 +318,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Ring</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -344,7 +344,7 @@
             </select>
           </div>
         </div>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="ring-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -362,7 +362,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Ring</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -388,7 +388,7 @@
             </select>
           </div>
         </div>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="ring-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -406,7 +406,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Position</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -432,7 +432,7 @@
             </select>
           </div>
         </div>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="border-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -450,7 +450,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Background</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 bg-gray-50 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="text-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
