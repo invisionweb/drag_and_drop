@@ -31,7 +31,7 @@
       </button>
       <button
           class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white"
-          title="Clear Canvas" @click="show_code_mirror = !show_code_mirror">
+          title="Get code" @click="get_code">
         <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
              xmlns="http://www.w3.org/2000/svg">
           <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round"
@@ -66,13 +66,14 @@
       <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
       <div id="flex" class="p-2 draggable cursor-move select-none">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div
+              class="rounded-md text-white font-extrabold text-center border-2 border-dashed border-black h-6 w-6"></div>
           <span class="text-xs text-gray-500">Container</span>
           <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
         </div>
       </div>
-      <div id="img" class="p-1 draggable cursor-move select-none">
+      <div id="img" class="p-1 draggable cursor-move select-none text-indigo-700">
         <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
@@ -82,7 +83,13 @@
       </div>
       <div id="table" class="p-2 draggable cursor-move select-none">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+          </div>
           <span class="text-xs text-gray-500">Table</span>
           <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
@@ -90,7 +97,13 @@
       </div>
       <div id="list" class="p-2 draggable cursor-move select-none">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+          </div>
           <span class="text-xs text-gray-500">List</span>
           <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
@@ -98,7 +111,13 @@
       </div>
       <div id="add-element" class="p-2 draggable cursor-move select-none">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6">+</div>
+          <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
+            </svg>
+          </div>
           <span class="text-xs text-gray-500">Element</span>
           <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
@@ -157,42 +176,79 @@
         <h3 class="py-1 px-2 bg-gray-100">Flex</h3>
 
         <div>
-          <button data-template="flex-direction" class="w-full p-2 hover:bg-indigo-50 properties">Flex direction</button>
+          <button data-template="flex-direction" class="w-full p-2 hover:bg-indigo-50 properties">Flex direction
+          </button>
         </div>
         <div class="hidden">
           <div id="flex-direction">
-          <div class="flex flex-col divide-y space-y-2 my-1">
-            <div class="flex flex-row bg-indigo-50 w-72 border rounded p-1">
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
-            </div>
-            <div class="flex flex-row-reverse bg-indigo-50 w-72 border rounded p-1">
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
-            </div>
-            <div class="flex flex-col bg-indigo-50 w-72 border rounded p-1">
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
-            </div>
-            <div class="flex flex-col-reverse bg-indigo-50 w-72 border rounded p-1">
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">1</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">2</div>
-              <div class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">3</div>
+            <div class="flex flex-col divide-y space-y-2 my-1">
+              <div class="flex flex-row bg-indigo-50 w-72 border rounded p-1">
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  1
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  2
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  3
+                </div>
+              </div>
+              <div class="flex flex-row-reverse bg-indigo-50 w-72 border rounded p-1">
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  1
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  2
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  3
+                </div>
+              </div>
+              <div class="flex flex-col bg-indigo-50 w-72 border rounded p-1">
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  1
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  2
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  3
+                </div>
+              </div>
+              <div class="flex flex-col-reverse bg-indigo-50 w-72 border rounded p-1">
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  1
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  2
+                </div>
+                <div
+                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                  3
+                </div>
+              </div>
             </div>
           </div>
-            </div>
         </div>
 
-          <button data-template="justify-content" class="p-2 hover:bg-indigo-100">Justify Content</button>
-          <!--        <select id="flex-row-or-col" @change="add_class">
-                    <option>
-                      flex-row
-                    </option>
-                    <option>flex-col</option>
-                  </select>-->
+        <button data-template="justify-content" class="p-2 hover:bg-indigo-100">Justify Content</button>
+        <!--        <select id="flex-row-or-col" @change="add_class">
+                  <option>
+                    flex-row
+                  </option>
+                  <option>flex-col</option>
+                </select>-->
       </div>
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
@@ -200,8 +256,11 @@
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
-            <select id="m" @change="add_class" class="appearance-none bg-white text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="margin in margins" :key="margin">{{ margin }}</option>
+            <select id="mt" @change="add_class"
+                    class="appearance-none bg-white text-xs border border-gray-300 px-2 py-1 w-full">
+              <template v-for="margin in margins" :key="margin">
+                <option v-if="/mt/gi.test(margin)">{{ margin }}</option>
+              </template>
             </select>
           </div>
           <div class="flex flex-col w-1/4">
@@ -286,7 +345,8 @@
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
-            <select id="border-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select id="border-color" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
             </select>
           </div>
@@ -348,7 +408,8 @@
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
-            <select id="ring-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select id="ring-color" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="ring_color in ring_colors" :key="ring_color">{{ ring_color }}</option>
             </select>
           </div>
@@ -392,7 +453,8 @@
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
-            <select id="ring-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select id="ring-color" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="ring_color in ring_colors" :key="ring_color">{{ ring_color }}</option>
             </select>
           </div>
@@ -436,7 +498,8 @@
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
-            <select id="border-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select id="border-color" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
             </select>
           </div>
@@ -451,44 +514,29 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Background</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
-          <div class="flex flex-col w-1/4">
+        <div class="flex col-span-1 px-2 pb-2 pt-1 gap-1">
+          <div class="flex flex-col">
             <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
-            <select id="text-color" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in bg_colors" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Size</label>
-            <select id="text-size" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Font</label>
-            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
-            <select id="font-weight" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in font_weights" :key="pading">{{ pading }}</option>
+            <select id="bg" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="bg_color in bg_colors" :key="bg_color">{{ bg_color }}</option>
             </select>
           </div>
         </div>
       </div>
 
       <div class="flex flex-col">
-        <label class="text-xs font-semibold text-gray-500 my-1">Shadow</label>
-        <select id="font-weight" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-          <option v-for="pading in shadows" :key="pading">{{ pading }}</option>
+        <label for="shadow" class="text-xs font-semibold text-gray-500 my-1">Shadow</label>
+        <select id="shadow" @change="add_class"
+                class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+          <option v-for="shadow in shadows" :key="shadow">{{ shadow }}</option>
         </select>
       </div>
       <div class="flex flex-col">
-        <label class="text-xs font-semibold text-gray-500 my-1">Radius</label>
-        <select id="font-weight" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-          <option v-for="pading in border_radiuses" :key="pading">{{ pading }}</option>
+        <label for="rounded" class="text-xs font-semibold text-gray-500 my-1">Radius</label>
+        <select id="rounded" @change="add_class"
+                class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+          <option v-for="border_radius in border_radiuses" :key="border_radius">{{ border_radius }}</option>
         </select>
       </div>
     </div>
@@ -535,12 +583,12 @@
             <div
                 class="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl"
             >
-<!--              <DialogTitle
-                  as="h3"
-                  class="text-lg font-medium leading-6 text-gray-900"
-              >
-                Payment successful
-              </DialogTitle>-->
+              <!--              <DialogTitle
+                                as="h3"
+                                class="text-lg font-medium leading-6 text-gray-900"
+                            >
+                              Payment successful
+                            </DialogTitle>-->
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
                   To apply designs select one element inside the canvas.
@@ -700,12 +748,12 @@ export default {
     return {
       dragging_element_name: "",
       code_mirror_editor: null,
+      show_code_mirror: false,
       code_editor: null,
       selected_element: null,
       selected_element_html: "",
       selected_element_inner_html: "",
       selected_element_classes: "",
-      show_code_mirror: false,
 
       margins: [
         "m-0", "m-px", "m-0.5", "m-1", "m-1.5", "m-2", "m-2.5", "m-3", "m-3.5", "m-4", "m-5",
@@ -834,130 +882,251 @@ export default {
         "-ml-32", "-ml-36", "-ml-40", "-ml-44", "-ml-48", "-ml-52", "-ml-56", "-ml-60", "-ml-64", "-ml-72", "-ml-80", "-ml-96",
       ],
       paddings: [
-        "p-0", "p-px", "p-0.5", "p-1", "p-1.5", "p-2", "p-2.5", "p-3", "p-3.5", "p-4", "p-5",
-        "p-6", "p-7", "p-8", "p-9", "p-10", "p-11", "p-12", "p-14", "p-16", "p-20", "p-24", "p-28",
-        "p-32", "p-36", "p-40", "p-44", "p-48", "p-52", "p-56", "p-60", "p-64", "p-72", "p-80", "p-96",
-        "p-auto", "-p-0", "-p-px", "-p-0.5", "-p-1", "-p-1.5", "-p-2", "-p-2.5", "-p-3", "-p-3.5", "-p-4", "-p-5",
-        "-p-6", "-p-7", "-p-8", "-p-9", "-p-10", "-p-11", "-p-12", "-p-14", "-p-16", "-p-20", "-p-24", "-p-28",
-        "-p-32", "-p-36", "-p-40", "-p-44", "-p-48", "-p-52", "-p-56", "-p-60",
-        "-p-64", "-p-72", "-p-80", "-p-96", "px-0", "px-px", "px-0.5", "px-1",
-        "px-1.5", "px-2", "px-2.5", "px-3", "px-3.5", "px-4", "px-5", "px-6", "px-7", "px-8", "px-9", "px-10",
-        "px-11", "px-12", "px-14", "px-16", "px-20", "px-24", "px-28", "px-32",
-        "px-36", "px-40", "px-44", "px-48", "px-52", "px-56", "px-60", "px-64",
-        "px-72", "px-80", "px-96", "px-auto", "-px-0", "-px-px", "-px-0.5", "-px-1",
-        "-px-1.5", "-px-2", "-px-2.5", "-px-3", "-px-3.5", "-px-4", "-px-5", "-px-6",
-        "-px-7", "-px-8", "-px-9", "-px-10", "-px-11", "-px-12", "-px-14", "-px-16",
-        "-px-20", "-px-24", "-px-28", "-px-32", "-px-36", "-px-40", "-px-44", "-px-48",
-        "-px-52", "-px-56", "-px-60", "-px-64", "-px-72", "-px-80", "-px-96", "py-0", "py-px", "py-0.5", "py-1", "py-1.5",
-        "py-2", "py-2.5", "py-3", "py-3.5", "py-4", "py-5", "py-6", "py-7", "py-8", "py-9", "py-10", "py-11",
-        "py-12", "py-14", "py-16", "py-20", "py-24", "py-28", "py-32", "py-36",
-        "py-40", "py-44", "py-48", "py-52", "py-56", "py-60", "py-64", "py-72",
-        "py-80", "py-96", "py-auto", "-py-0", "-py-px", "-py-0.5", "-py-1", "-py-1.5",
-        "-py-2", "-py-2.5", "-py-3", "-py-3.5", "-py-4", "-py-5", "-py-6", "-py-7", "-py-8", "-py-9",
-        "-py-10", "-py-11", "-py-12", "-py-14", "-py-16", "-py-20", "-py-24", "-py-28",
-        "-py-32", "-py-36", "-py-40", "-py-44", "-py-48", "-py-52", "-py-56", "-py-60",
-        "-py-64", "-py-72", "-py-80", "-py-96", "pt-0", "pt-px", "pt-0.5", "pt-1",
-        "pt-1.5", "pt-2", "pt-2.5", "pt-3", "pt-3.5", "pt-4", "pt-5", "pt-6",
-        "pt-7", "pt-8", "pt-9", "pt-10", "pt-11", "pt-12", "pt-14", "pt-16",
-        "pt-20", "pt-24", "pt-28", "pt-32", "pt-36", "pt-40", "pt-44", "pt-48",
-        "pt-52", "pt-56", "pt-60", "pt-64", "pt-72", "pt-80", "pt-96", "pt-auto",
-        "-pt-0", "-pt-px", "-pt-0.5", "-pt-1", "-pt-1.5", "-pt-2", "-pt-2.5",
-        "-pt-3", "-pt-3.5", "-pt-4", "-pt-5", "-pt-6", "-pt-7", "-pt-8", "-pt-9",
-        "-pt-10", "-pt-11", "-pt-12", "-pt-14", "-pt-16", "-pt-20", "-pt-24", "-pt-28",
-        "-pt-32", "-pt-36", "-pt-40", "-pt-44", "-pt-48", "-pt-52", "-pt-56", "-pt-60", "-pt-64", "-pt-72",
-        "-pt-80", "-pt-96", "pr-0", "pr-px", "pr-0.5", "pr-1", "pr-1.5", "pr-2", "pr-2.5", "pr-3",
-        "pr-3.5", "pr-4",
-        "pr-5", "pr-6",
-        "pr-7", "pr-8",
-        "pr-9", "pr-10",
-        "pr-11", "pr-12",
-        "pr-14", "pr-16",
-        "pr-20", "pr-24",
-        "pr-28", "pr-32",
-        "pr-36", "pr-40",
-        "pr-44", "pr-48",
-        "pr-52", "pr-56",
-        "pr-60", "pr-64",
-        "pr-72", "pr-80",
-        "pr-96", "pr-auto",
-        "-pr-0", "-pr-px",
-        "-pr-0.5", "-pr-1",
-        "-pr-1.5", "-pr-2",
-        "-pr-2.5", "-pr-3",
-        "-pr-3.5", "-pr-4",
-        "-pr-5", "-pr-6",
-        "-pr-7", "-pr-8",
-        "-pr-9", "-pr-10",
-        "-pr-11", "-pr-12",
-        "-pr-14", "-pr-16",
-        "-pr-20", "-pr-24",
-        "-pr-28", "-pr-32",
-        "-pr-36", "-pr-40",
-        "-pr-44", "-pr-48",
-        "-pr-52", "-pr-56",
-        "-pr-60", "-pr-64",
-        "-pr-72", "-pr-80",
-        "-pr-96", "pb-0",
-        "pb-px", "pb-0.5",
-        "pb-1", "pb-1.5",
-        "pb-2", "pb-2.5",
-        "pb-3", "pb-3.5",
-        "pb-4", "pb-5",
-        "pb-6", "pb-7",
-        "pb-8", "pb-9",
-        "pb-10", "pb-11",
-        "pb-12", "pb-14",
-        "pb-16", "pb-20",
-        "pb-24", "pb-28",
-        "pb-32", "pb-36",
-        "pb-40", "pb-44",
-        "pb-48", "pb-52",
-        "pb-56", "pb-60",
-        "pb-64", "pb-72",
-        "pb-80", "pb-96",
-        "pb-auto", "-pb-0",
-        "-pb-px", "-pb-0.5",
-        "-pb-1", "-pb-1.5",
-        "-pb-2", "-pb-2.5",
-        "-pb-3",
-        "-pb-3.5",
-        "-pb-4",
-        "-pb-5", "-pb-6",
-        "-pb-7", "-pb-8",
-        "-pb-9", "-pb-10",
-        "-pb-11", "-pb-12",
-        "-pb-14", "-pb-16",
-        "-pb-20", "-pb-24",
-        "-pb-28", "-pb-32",
-        "-pb-36", "-pb-40",
-        "-pb-44", "-pb-48",
-        "-pb-52", "-pb-56",
-        "-pb-60", "-pb-64",
-        "-pb-72", "-pb-80",
-        "-pb-96", "pl-0",
-        "pl-px", "pl-0.5",
-        "pl-1", "pl-1.5",
-        "pl-2", "pl-2.5",
-        "pl-3", "pl-3.5",
-        "pl-4", "pl-5", "pl-6",
-        "pl-7", "pl-8",
-        "pl-9", "pl-10",
-        "pl-11", "pl-12",
-        "pl-14", "pl-16",
-        "pl-20", "pl-24", "pl-28",
-        "pl-32", "pl-36",
-        "pl-40", "pl-44",
-        "pl-48", "pl-52",
-        "pl-56", "pl-60",
-        "pl-64", "pl-72",
-        "pl-80", "pl-96",
-        "pl-auto", "-pl-0",
-        "-pl-px", "-pl-0.5",
-        "-pl-1", "-pl-1.5", "-pl-2",
-        "-pl-2.5", "-pl-3",
-        "-pl-3.5", "-pl-4",
-        "-pl-5", "-pl-6", "-pl-7", "-pl-8", "-pl-9", "-pl-10", "-pl-11", "-pl-12", "-pl-14", "-pl-16", "-pl-20", "-pl-24", "-pl-28",
-        "-pl-32", "-pl-36", "-pl-40", "-pl-44", "-pl-48", "-pl-52", "-pl-56", "-pl-60", "-pl-64", "-pl-72", "-pl-80", "-pl-96",
+        "p-0",
+        "p-px",
+        "p-0.5",
+        "p-1",
+        "p-1.5",
+        "p-2",
+        "p-2.5",
+        "p-3",
+        "p-3.5",
+        "p-4",
+        "p-5",
+        "p-6",
+        "p-7",
+        "p-8",
+        "p-9",
+        "p-10",
+        "p-11",
+        "p-12",
+        "p-14",
+        "p-16",
+        "p-20",
+        "p-24",
+        "p-28",
+        "p-32",
+        "p-36",
+        "p-40",
+        "p-44",
+        "p-48",
+        "p-52",
+        "p-56",
+        "p-60",
+        "p-64",
+        "p-72",
+        "p-80",
+        "p-96",
+        "px-0",
+        "px-px",
+        "px-0.5",
+        "px-1",
+        "px-1.5",
+        "px-2",
+        "px-2.5",
+        "px-3",
+        "px-3.5",
+        "px-4",
+        "px-5",
+        "px-6",
+        "px-7",
+        "px-8",
+        "px-9",
+        "px-10",
+        "px-11",
+        "px-12",
+        "px-14",
+        "px-16",
+        "px-20",
+        "px-24",
+        "px-28",
+        "px-32",
+        "px-36",
+        "px-40",
+        "px-44",
+        "px-48",
+        "px-52",
+        "px-56",
+        "px-60",
+        "px-64",
+        "px-72",
+        "px-80",
+        "px-96",
+        "py-0	",
+        "py-px",
+        "py-0.5",
+        "py-1",
+        "py-1.5",
+        "py-2",
+        "py-2.5",
+        "py-3",
+        "py-3.5",
+        "py-4",
+        "py-5",
+        "py-6",
+        "py-7",
+        "py-8",
+        "py-9",
+        "py-10",
+        "py-11",
+        "py-12",
+        "py-14",
+        "py-16",
+        "py-20",
+        "py-24",
+        "py-28",
+        "py-32",
+        "py-36",
+        "py-40",
+        "py-44",
+        "py-48",
+        "py-52",
+        "py-56",
+        "py-60",
+        "py-64",
+        "py-72",
+        "py-80",
+        "py-96",
+        "pt-0",
+        "pt-px",
+        "pt-0.5",
+        "pt-1",
+        "pt-1.5",
+        "pt-2",
+        "pt-2.5",
+        "pt-3",
+        "pt-3.5",
+        "pt-4",
+        "pt-5",
+        "pt-6",
+        "pt-7",
+        "pt-8",
+        "pt-9",
+        "pt-10",
+        "pt-11",
+        "pt-12",
+        "pt-14",
+        "pt-16",
+        "pt-20",
+        "pt-24",
+        "pt-28",
+        "pt-32",
+        "pt-36",
+        "pt-40",
+        "pt-44",
+        "pt-48",
+        "pt-52",
+        "pt-56",
+        "pt-60",
+        "pt-64",
+        "pt-72",
+        "pt-80",
+        "pt-96",
+        "pr-0",
+        "pr-px",
+        "pr-0.5",
+        "pr-1",
+        "pr-1.5",
+        "pr-2",
+        "pr-2.5",
+        "pr-3",
+        "pr-3.5",
+        "pr-4",
+        "pr-5",
+        "pr-6",
+        "pr-7",
+        "pr-8",
+        "pr-9",
+        "pr-10",
+        "pr-11",
+        "pr-12",
+        "pr-14",
+        "pr-16",
+        "pr-20",
+        "pr-24",
+        "pr-28",
+        "pr-32",
+        "pr-36",
+        "pr-40",
+        "pr-44",
+        "pr-48",
+        "pr-52",
+        "pr-56",
+        "pr-60",
+        "pr-64",
+        "pr-72",
+        "pr-80",
+        "pr-96",
+        "pb-0",
+        "pb-px",
+        "pb-0.5",
+        "pb-1",
+        "pb-1.5",
+        "pb-2",
+        "pb-2.5",
+        "pb-3",
+        "pb-3.5",
+        "pb-4",
+        "pb-5",
+        "pb-6",
+        "pb-7",
+        "pb-8",
+        "pb-9",
+        "pb-10",
+        "pb-11",
+        "pb-12",
+        "pb-14",
+        "pb-16",
+        "pb-20",
+        "pb-24",
+        "pb-28",
+        "pb-32",
+        "pb-36",
+        "pb-40",
+        "pb-44",
+        "pb-48",
+        "pb-52",
+        "pb-56",
+        "pb-60",
+        "pb-64",
+        "pb-72",
+        "pb-80",
+        "pb-96",
+        "pl-0",
+        "pl-px",
+        "pl-0.5",
+        "pl-1",
+        "pl-1.5",
+        "pl-2",
+        "pl-2.5",
+        "pl-3",
+        "pl-3.5",
+        "pl-4",
+        "pl-5",
+        "pl-6",
+        "pl-7",
+        "pl-8",
+        "pl-9",
+        "pl-10",
+        "pl-11",
+        "pl-12",
+        "pl-14",
+        "pl-16",
+        "pl-20",
+        "pl-24",
+        "pl-28",
+        "pl-32",
+        "pl-36",
+        "pl-40",
+        "pl-44",
+        "pl-48",
+        "pl-52",
+        "pl-56",
+        "pl-60",
+        "pl-64",
+        "pl-72",
+        "pl-80",
+        "pl-96"
       ],
       widths: ["w-0", "w-px", "w-0.5", "w-1", "w-1.5", "w-2", "w-2.5", "w-3", "w-3.5", "w-4",
         "w-5", "w-6", "w-7", "w-8", "w-9", "w-10", "w-11", "w-12", "w-14", "w-16", "w-20",
@@ -979,8 +1148,14 @@ export default {
       ],
       bg_colors: [
         "bg-transparent", "bg-current", "bg-black", "bg-white",
-        "bg-gray-50", "bg-red-50", "bg-yellow-50", "bg-green-50",
-        "bg-blue-50", "bg-indigo-50", "bg-purple-50", "bg-pink-50",
+        "bg-gray-50","bg-gray-100","bg-gray-200","bg-gray-300", "bg-gray-400", "bg-gray-500","bg-gray-600","bg-gray-700","bg-gray-800", "bg-gray-900",
+        "bg-red-50","bg-red-100","bg-red-200","bg-red-300","bg-red-400","bg-red-500","bg-red-600","bg-red-700","bg-red-800","bg-red-900",
+        "bg-yellow-50","bg-yellow-100","bg-yellow-200","bg-yellow-300","bg-yellow-400","bg-yellow-500","bg-yellow-600","bg-yellow-700","bg-yellow-800","bg-yellow-900",
+        "bg-green-50","bg-green-100","bg-green-200","bg-green-300","bg-green-400","bg-green-500","bg-green-600","bg-green-700","bg-green-800","bg-green-900",
+        "bg-blue-50","bg-blue-100","bg-blue-200","bg-blue-300","bg-blue-400","bg-blue-500","bg-blue-600","bg-blue-700", "bg-blue-800", "bg-blue-900",
+        "bg-indigo-50","bg-indigo-100","bg-indigo-200","bg-indigo-300","bg-indigo-400","bg-indigo-500","bg-indigo-600","bg-indigo-700", "bg-indigo-800", "bg-indigo-900",
+        "bg-purple-50","bg-purple-100","bg-purple-200","bg-purple-300","bg-purple-400","bg-purple-500","bg-purple-600","bg-purple-700", "bg-purple-800", "bg-purple-900",
+        "bg-pink-50","bg-pink-100","bg-pink-200","bg-pink-300","bg-pink-400","bg-pink-500","bg-pink-600","bg-pink-700", "bg-pink-800", "bg-pink-900",
       ],
       text_colors: [
         "text-transparent", "text-current", "text-black", "text-white",
@@ -1039,7 +1214,7 @@ export default {
         "ring-blue-500", "ring-indigo-500", "ring-purple-500", "ring-pink-500",
       ],
       shadows: [
-        "*, ::before, ::after", "shadow-sm", "box-shadow", "shadow",
+        /*"*, ::before, ::after",*/ "shadow-sm", "box-shadow", "shadow",
         "box-shadow", "shadow-md", "box-shadow", "shadow-lg", "box-shadow",
         "shadow-xl", "box-shadow", "shadow-2xl", "box-shadow", "shadow-inner",
         "box-shadow", "shadow-none"
@@ -1050,7 +1225,7 @@ export default {
     };
   },
   methods: {
-    apply_style(){
+    apply_style() {
       console.log('apply style')
     },
     add_class(event) {
@@ -1071,8 +1246,9 @@ export default {
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      } else if (style_to_apply === "m") {
-        classes = classes.replace(/m-\d+/gim, class_to_add);
+      } else if (style_to_apply === "mt") {
+        //classes = classes.replace(/m-\d+/gim, class_to_add);
+        classes = classes.replace(/mt-\d+/gim, class_to_add);
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
@@ -1109,6 +1285,26 @@ export default {
         }
       } else if (style_to_apply === "w") {
         classes = classes.replace(/(^|\s)w-\d+(\/?\d)?/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      } else if (style_to_apply === "w") {
+        classes = classes.replace(/(^|\s)w-\d+(\/?\d)?/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      }
+      else if (style_to_apply === "shadow") {
+        classes = classes.replace(/(^|\s)(box-)?shadow-?(\w+)?/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      }
+      else if (style_to_apply === "rounded") {
+        classes = classes.replace(/(^|\s)rounded-?(\d+|\w+)?-?(\d+|\w+)?(\d+|\w+)?/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
@@ -1276,6 +1472,22 @@ export default {
       });*/
 
       return element
+    },
+    get_code() {
+      let self = this
+      self.code_mirror_editor.dispatch({
+        changes: {
+          from: 0,
+          to: self.code_mirror_editor.state.doc.toString().length,
+          insert: js_beautify.html($("#draggable-items-container").html(), {
+            "indent_size": "4",
+            "indent_char": " ",
+            "max_preserve_newlines": "5",
+            "preserve_newlines": true,
+          })
+        }
+      })
+      this.show_code_mirror = !this.show_code_mirror
     }
   },
   mounted() {
@@ -1610,13 +1822,13 @@ export default {
 
           //instance.setContent(element)
 
-          $(instance).click(function(){
+          $(instance).click(function () {
             alert('click')
           })
         }
       });
 
-      $(document).click(function(e){
+      $(document).click(function (e) {
         console.log('docs click', e.target)
       });
     });
