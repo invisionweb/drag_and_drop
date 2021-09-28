@@ -133,7 +133,7 @@
         class="droppable min-h-full w-full border hidden"
     ></div>
 
-    <div class="px-4 pb-4 flex flex-col space-y-4 col-span-8 lg:col-span-2">
+    <div class="px-4 pb-4 flex flex-col space-y-4 col-span-8 lg:col-span-2 h-screen overflow-y-auto">
       <div class="border border-gray-300 divide-x divide-gray-500 flex items-center space-x-2 p-2 rounded-md">
         <button @click="duplicate_element">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -161,9 +161,10 @@
         </button>
       </div>
       <div id="element" class="hidden"></div>
-      <textarea v-model="selected_element_classes"
-                class="resize-none border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
-                placeholder="Classes"></textarea>
+    <!--      <textarea id="selected_element_classes"
+                class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
+                placeholder="Classes"></textarea>-->
+      <div id="selected_element_classes"></div>
       <input type="text" v-model="selected_element_inner_html"
              class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
              placeholder="HTML">
@@ -316,7 +317,7 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Border</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1 hidden">
           <div class="flex flex-col w-1/4">
             <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -342,18 +343,24 @@
             </select>
           </div>
         </div>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
-          <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
+        <div class="flex col-span-3 px-2 pb-2 pt-1 gap-1">
+          <div class="flex flex-col w-1/3">
+            <label for="border-color" class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="border-color" @change="add_class"
                     class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
             </select>
           </div>
-          <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
-            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+          <div class="flex flex-col w-1/3">
+            <label for="border-width" class="text-xs font-semibold text-gray-500 my-1">Width</label>
+            <select id="border-width" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="border_width in border_widths" :key="border_width">{{ border_width }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/3">
+            <label for="border-style" class="text-xs font-semibold text-gray-500 my-1">Style</label>
+            <select id="border-style" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="border_style in border_styles" :key="border_style">{{ border_style }}</option>
             </select>
           </div>
         </div>
@@ -363,13 +370,13 @@
         <h3 class="py-1 px-2 bg-gray-100">Width & Height</h3>
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Width</label>
+            <label for="w" class="text-xs font-semibold text-gray-500 my-1">Width</label>
             <select id="w" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="width in widths" :key="width">{{ width }}</option>
             </select>
           </div>
           <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Height</label>
+            <label for="h" class="text-xs font-semibold text-gray-500 my-1">Height</label>
             <select id="h" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="height in heights" :key="height">{{ height }}</option>
             </select>
@@ -377,52 +384,7 @@
         </div>
       </div>
 
-      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
-        <h3 class="py-1 px-2 bg-gray-100">Ring</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
-            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
-            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
-            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
-            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-        </div>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
-          <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
-            <select id="ring-color" @change="add_class"
-                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="ring_color in ring_colors" :key="ring_color">{{ ring_color }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
-            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y hidden">
         <h3 class="py-1 px-2 bg-gray-100">Ring</h3>
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
@@ -516,7 +478,7 @@
         <h3 class="py-1 px-2 bg-gray-100">Background</h3>
         <div class="flex col-span-1 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col">
-            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
+            <label for="bg" class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="bg" @change="add_class"
                     class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="bg_color in bg_colors" :key="bg_color">{{ bg_color }}</option>
@@ -749,6 +711,7 @@ export default {
       dragging_element_name: "",
       code_mirror_editor: null,
       show_code_mirror: false,
+      codemirror_classes_editor: null,
       code_editor: null,
       selected_element: null,
       selected_element_html: "",
@@ -1176,15 +1139,24 @@ export default {
       ],
       border_colors: [
         "border-transparent", "border-current", "border-black", "border-white",
-        "border-gray-500", "border-red-500", "border-yellow-500", "border-green-500",
-        "border-blue-500", "border-indigo-500", "border-purple-500", "border-pink-500",
+        "border-gray-50","border-gray-100","border-gray-200","border-gray-300", "border-gray-400", "border-gray-500","border-gray-600","border-gray-700","border-gray-800", "border-gray-900",
+        "border-red-50","border-red-100","border-red-200","border-red-300","border-red-400","border-red-500","border-red-600","border-red-700","border-red-800","border-red-900",
+        "border-yellow-50","border-yellow-100","border-yellow-200","border-yellow-300","border-yellow-400","border-yellow-500","border-yellow-600","border-yellow-700","border-yellow-800","border-yellow-900",
+        "border-green-50","border-green-100","border-green-200","border-green-300","border-green-400","border-green-500","border-green-600","border-green-700","border-green-800","border-green-900",
+        "border-blue-50","border-blue-100","border-blue-200","border-blue-300","border-blue-400","border-blue-500","border-blue-600","border-blue-700", "border-blue-800", "border-blue-900",
+        "border-indigo-50","border-indigo-100","border-indigo-200","border-indigo-300","border-indigo-400","border-indigo-500","border-indigo-600","border-indigo-700", "border-indigo-800", "border-indigo-900",
+        "border-purple-50","border-purple-100","border-purple-200","border-purple-300","border-purple-400","border-purple-500","border-purple-600","border-purple-700", "border-purple-800", "border-purple-900",
+        "border-pink-50","border-pink-100","border-pink-200","border-pink-300","border-pink-400","border-pink-500","border-pink-600","border-pink-700", "border-pink-800", "border-pink-900",
       ],
-      border_width: [
+      border_widths: [
         "border-0", "border-2", "border-4", "border-8", "border", "border-t-0",
         "border-t-2", "border-t-4", "border-t-8", "border-t	", "border-r-0	",
         "border-r-2", "border-r-4", "border-r-8", "border-r", "border-b-0",
         "border-b-2", "border-b-4", "border-b-8", "border-b", "border-l-0", "border-l-2", "border-l-4",
         "border-l-8", "border-l",
+      ],
+      border_styles: [
+        "border-solid", "border-dashed", "border-dotted", "border-double", "border-none"
       ],
       border_radiuses: [
         "rounded-none", "rounded-sm", "rounded", "rounded-md", "rounded-lg",
@@ -1210,8 +1182,14 @@ export default {
       ],
       ring_colors: [
         "ring-transparent", "ring-current", "ring-black", "ring-white",
-        "ring-gray-500", "ring-red-500", "ring-yellow-500", "ring-green-500",
-        "ring-blue-500", "ring-indigo-500", "ring-purple-500", "ring-pink-500",
+        "ring-gray-50","ring-gray-100","ring-gray-200","ring-gray-300", "ring-gray-400", "ring-gray-500","ring-gray-600","ring-gray-700","ring-gray-800", "ring-gray-900",
+        "ring-red-50","ring-red-100","ring-red-200","ring-red-300","ring-red-400","ring-red-500","ring-red-600","ring-red-700","ring-red-800","ring-red-900",
+        "ring-yellow-50","ring-yellow-100","ring-yellow-200","ring-yellow-300","ring-yellow-400","ring-yellow-500","ring-yellow-600","ring-yellow-700","ring-yellow-800","ring-yellow-900",
+        "ring-green-50","ring-green-100","ring-green-200","ring-green-300","ring-green-400","ring-green-500","ring-green-600","ring-green-700","ring-green-800","ring-green-900",
+        "ring-blue-50","ring-blue-100","ring-blue-200","ring-blue-300","ring-blue-400","ring-blue-500","ring-blue-600","ring-blue-700", "ring-blue-800", "ring-blue-900",
+        "ring-indigo-50","ring-indigo-100","ring-indigo-200","ring-indigo-300","ring-indigo-400","ring-indigo-500","ring-indigo-600","ring-indigo-700", "ring-indigo-800", "ring-indigo-900",
+        "ring-purple-50","ring-purple-100","ring-purple-200","ring-purple-300","ring-purple-400","ring-purple-500","ring-purple-600","ring-purple-700", "ring-purple-800", "ring-purple-900",
+        "ring-pink-50","ring-pink-100","ring-pink-200","ring-pink-300","ring-pink-400","ring-pink-500","ring-pink-600","ring-pink-700", "ring-pink-800", "ring-pink-900",
       ],
       shadows: [
         /*"*, ::before, ::after",*/ "shadow-sm", "box-shadow", "shadow",
@@ -1266,12 +1244,31 @@ export default {
           classes += " " + class_to_add + " ";
         }
       } else if (style_to_apply === "border-color") {
-        classes = classes.replace(/(^|\s)border-\w+-\d+/gim, " " + class_to_add + " ");
+        classes = classes.replace(/(^|\s)border-\w+(-\d+)?/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      } else if (style_to_apply === "ring-color") {
+      }
+      else if (style_to_apply === "border-width") {
+        //classes = classes.replace(/(^|\s)border-?[trbl]?-?\d?/gim, " " + class_to_add + " ");
+        //let elem_classes = $(this.selected_element).attr("class").split(/\s+/)
+
+        for(let border_width in this.border_widths){
+          classes.replace(/this.border_widths[border_width]/gim, '');
+          console.log(this.border_widths[border_width])
+        }
+
+        classes += " " + class_to_add;
+      }
+      else if (style_to_apply === "border-style") {
+        classes = classes.replace(/(^|\s)border-\w+/gim, " " + class_to_add + " ");
+
+        if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }
+      }
+      else if (style_to_apply === "ring-color") {
         classes = classes.replace(/(^|\s)ring-\w+-\d+/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
@@ -1289,8 +1286,8 @@ export default {
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      } else if (style_to_apply === "w") {
-        classes = classes.replace(/(^|\s)w-\d+(\/?\d)?/gim, " " + class_to_add + " ");
+      } else if (style_to_apply === "h") {
+        classes = classes.replace(/(^|\s)h-\d+(\/?\d)?/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
@@ -1352,7 +1349,7 @@ export default {
       $(this.selected_element).remove()
     },
     remove_frame_border() {
-      $(this.selected_element).removeClass('container-frame')
+      //$(this.selected_element).removeClass('container-frame')
     },
     create_dropped_element() {
       let self = this
@@ -1381,7 +1378,7 @@ export default {
         element = document.createElement("div");
         $(element)
             .addClass(
-                "container-frame m-2 p-2 flex flex-col gap-4 droppable-flex-container"
+                "m-2 p-2 flex flex-col gap-4 border border-gray-200 droppable-flex-container"
             )
             /* .droppable({
               accept: ".draggable",
@@ -1458,6 +1455,7 @@ export default {
 
         $("#draggable-items-container").find('*')/*.children()*/.removeClass('selected-element')
         $(e.target).addClass('selected-element')
+
         self.selected_element_classes = $(e.target).attr('class')
         return false;
       });
@@ -1758,6 +1756,23 @@ export default {
         parent: document.getElementById('code-mirror-editor')
       })
 
+      self.codemirror_classes_editor = new EditorView({
+        state: EditorState.create({
+          extensions: [
+            basicSetup,
+            html(),
+            EditorView.updateListener.of((v) => {
+              if (v.docChanged) {
+                console.log(v.state.doc.toString());
+                $(self.selected_element).attr("class", v.state.doc.toString())
+              }
+            }),
+          ],
+          doc: ''
+        }),
+        parent: document.getElementById('selected_element_classes')
+      })
+
       /*$( '#draggable-items-container' ).tooltip({
         trigger : 'hover',
         classes: {
@@ -1778,15 +1793,15 @@ export default {
       });*/
 
       $("textarea").each(function () {
-        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+        //this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
       }).on("input click", function () {
-        this.style.height = "auto";
-        this.style.height = (this.scrollHeight) + "px";
+        //this.style.height = "auto";
+        //this.style.height = (this.scrollHeight) + "px";
       });
 
       tippy('.properties', {
         //content: 'Drop elements here',
-        trigger: 'click mouseover',
+        trigger: 'click',
         content(reference) {
           const id = reference.getAttribute('data-template');
           const template = document.getElementById(id);
@@ -1842,6 +1857,15 @@ export default {
       } else {
         this.selected_element_inner_html = $(this.selected_element).html()
       }
+
+      // filling up classes editor
+      this.codemirror_classes_editor.dispatch({
+        changes: {
+          from: 0,
+          to: this.codemirror_classes_editor.state.doc.toString().length,
+          insert: $(this.selected_element).attr('class')
+        }
+      })
     },
     selected_element_inner_html() {
       if ($(this.selected_element).prop("tagName") === 'INPUT') {

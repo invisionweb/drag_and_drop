@@ -7,5 +7,5 @@
     @apply ring-2 ring-red-400;
 }
 .container-frame {
-    @apply border-2 border-dotted border-gray-200 m-2 p-4;
+    @apply ring ring-gray-200 m-2 p-4;
 }
