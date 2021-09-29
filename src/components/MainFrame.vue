@@ -161,9 +161,9 @@
         </button>
       </div>
       <div id="element" class="hidden"></div>
-    <!--      <textarea id="selected_element_classes"
-                class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
-                placeholder="Classes"></textarea>-->
+      <!--      <textarea id="selected_element_classes"
+                  class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
+                  placeholder="Classes"></textarea>-->
       <div id="selected_element_classes"></div>
       <input type="text" v-model="selected_element_inner_html"
              class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
@@ -316,6 +316,33 @@
       </div>
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
+        <h3 class="py-1 px-2 bg-gray-100">Text style</h3>
+        <div class="flex col-span-3 px-2 pb-2 pt-1 gap-1">
+          <div class="flex flex-col w-1/3">
+            <label for="text-color" class="text-xs font-semibold text-gray-500 my-1">Color</label>
+            <select id="text-color" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="class_name in text_colors" :key="class_name">{{ class_name }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/3">
+            <label for="text-font" class="text-xs font-semibold text-gray-500 my-1">Font</label>
+            <select id="text-font" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="class_name in font_families" :key="class_name">{{ class_name }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/3">
+            <label for="text-weight" class="text-xs font-semibold text-gray-500 my-1">Weight</label>
+            <select id="text-weight" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="class_name in font_weights" :key="class_name">{{ class_name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Border</h3>
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1 hidden">
           <div class="flex flex-col w-1/4">
@@ -353,13 +380,15 @@
           </div>
           <div class="flex flex-col w-1/3">
             <label for="border-width" class="text-xs font-semibold text-gray-500 my-1">Width</label>
-            <select id="border-width" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select id="border-width" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="border_width in border_widths" :key="border_width">{{ border_width }}</option>
             </select>
           </div>
           <div class="flex flex-col w-1/3">
             <label for="border-style" class="text-xs font-semibold text-gray-500 my-1">Style</label>
-            <select id="border-style" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select id="border-style" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="border_style in border_styles" :key="border_style">{{ border_style }}</option>
             </select>
           </div>
@@ -432,43 +461,53 @@
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Position</h3>
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
-            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+          <div class="flex flex-col w-1/2">
+            <label for="position-type" class="text-xs font-semibold text-gray-500 my-1">Type</label>
+            <select id="position-type" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="position in positions" :key="position">{{ position }}</option>
             </select>
           </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
-            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
-            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
-            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+          <div class="flex flex-col w-1/2">
+            <label for="inset-position" class="text-xs font-semibold text-gray-500 my-1">Inset</label>
+            <select id="inset-position" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <template v-for="trbli in trblis" :key="trbli">
+                <option v-if="/inset/gi.test(trbli)">{{ trbli }}</option>
+              </template>
             </select>
           </div>
         </div>
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
-          <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Color</label>
-            <select id="border-color" @change="add_class"
-                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="border_color in border_colors" :key="border_color">{{ border_color }}</option>
+          <div class="flex flex-col w-1/4">
+            <label for="position-top" class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="position-top" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <template v-for="trbli in trblis" :key="trbli">
+                <option v-if="/top/gi.test(trbli)">{{ trbli }}</option>
+              </template>
             </select>
           </div>
-          <div class="flex flex-col w-1/2">
-            <label class="text-xs font-semibold text-gray-500 my-1">Style</label>
-            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
+          <div class="flex flex-col w-1/4">
+            <label for="position-right" class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <select id="position-right" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <template v-for="trbli in trblis" :key="trbli">
+                <option v-if="/right/gi.test(trbli)">{{ trbli }}</option>
+              </template>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label for="position-bottom" class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <select id="position-bottom" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <template v-for="trbli in trblis" :key="trbli">
+                <option v-if="/bottom/gi.test(trbli)">{{ trbli }}</option>
+              </template>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
+            <label for="position-left" class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <select id="position-left" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <template v-for="trbli in trblis" :key="trbli">
+                <option v-if="/left/gi.test(trbli)">{{ trbli }}</option>
+              </template>
             </select>
           </div>
         </div>
@@ -553,7 +592,7 @@
                             </DialogTitle>-->
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
-                  To apply designs select one element inside the canvas.
+                  Click on an element inside the canvas to apply design.
                 </p>
               </div>
 
@@ -635,73 +674,6 @@ export default {
       openModal() {
         isOpen.value = true
       },
-
-      solutions: [
-        {
-          name: 'Insights',
-          description: 'Measure actions your users take',
-          href: '##',
-          icon: `
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              aria-hidden='true'
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="48" height="48" rx="8" fill="#FFEDD5" />
-              <path
-                d="M24 11L35.2583 17.5V30.5L24 37L12.7417 30.5V17.5L24 11Z"
-                stroke="#FB923C"
-                stroke-width="2"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M16.7417 19.8094V28.1906L24 32.3812L31.2584 28.1906V19.8094L24 15.6188L16.7417 19.8094Z"
-                stroke="#FDBA74"
-                stroke-width="2"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M20.7417 22.1196V25.882L24 27.7632L27.2584 25.882V22.1196L24 20.2384L20.7417 22.1196Z"
-                stroke="#FDBA74"
-                stroke-width="2"
-              />
-            </svg>
-          `,
-        },
-        {
-          name: 'Automations',
-          description: 'Create your own targeted content',
-          href: '##',
-          icon: `
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="48" height="48" rx="8" fill="#FFEDD5" />
-              <path
-                d="M28.0413 20L23.9998 13L19.9585 20M32.0828 27.0001L36.1242 34H28.0415M19.9585 34H11.8755L15.9171 27"
-                stroke="#FB923C"
-                stroke-width="2"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M18.804 30H29.1963L24.0001 21L18.804 30Z"
-                stroke="#FDBA74"
-                stroke-width="2"
-              />
-            </svg>
-          `,
-        },
-      ]
     }
   },
 
@@ -1111,19 +1083,26 @@ export default {
       ],
       bg_colors: [
         "bg-transparent", "bg-current", "bg-black", "bg-white",
-        "bg-gray-50","bg-gray-100","bg-gray-200","bg-gray-300", "bg-gray-400", "bg-gray-500","bg-gray-600","bg-gray-700","bg-gray-800", "bg-gray-900",
-        "bg-red-50","bg-red-100","bg-red-200","bg-red-300","bg-red-400","bg-red-500","bg-red-600","bg-red-700","bg-red-800","bg-red-900",
-        "bg-yellow-50","bg-yellow-100","bg-yellow-200","bg-yellow-300","bg-yellow-400","bg-yellow-500","bg-yellow-600","bg-yellow-700","bg-yellow-800","bg-yellow-900",
-        "bg-green-50","bg-green-100","bg-green-200","bg-green-300","bg-green-400","bg-green-500","bg-green-600","bg-green-700","bg-green-800","bg-green-900",
-        "bg-blue-50","bg-blue-100","bg-blue-200","bg-blue-300","bg-blue-400","bg-blue-500","bg-blue-600","bg-blue-700", "bg-blue-800", "bg-blue-900",
-        "bg-indigo-50","bg-indigo-100","bg-indigo-200","bg-indigo-300","bg-indigo-400","bg-indigo-500","bg-indigo-600","bg-indigo-700", "bg-indigo-800", "bg-indigo-900",
-        "bg-purple-50","bg-purple-100","bg-purple-200","bg-purple-300","bg-purple-400","bg-purple-500","bg-purple-600","bg-purple-700", "bg-purple-800", "bg-purple-900",
-        "bg-pink-50","bg-pink-100","bg-pink-200","bg-pink-300","bg-pink-400","bg-pink-500","bg-pink-600","bg-pink-700", "bg-pink-800", "bg-pink-900",
+        "bg-gray-50", "bg-gray-100", "bg-gray-200", "bg-gray-300", "bg-gray-400", "bg-gray-500", "bg-gray-600", "bg-gray-700", "bg-gray-800", "bg-gray-900",
+        "bg-red-50", "bg-red-100", "bg-red-200", "bg-red-300", "bg-red-400", "bg-red-500", "bg-red-600", "bg-red-700", "bg-red-800", "bg-red-900",
+        "bg-yellow-50", "bg-yellow-100", "bg-yellow-200", "bg-yellow-300", "bg-yellow-400", "bg-yellow-500", "bg-yellow-600", "bg-yellow-700", "bg-yellow-800", "bg-yellow-900",
+        "bg-green-50", "bg-green-100", "bg-green-200", "bg-green-300", "bg-green-400", "bg-green-500", "bg-green-600", "bg-green-700", "bg-green-800", "bg-green-900",
+        "bg-blue-50", "bg-blue-100", "bg-blue-200", "bg-blue-300", "bg-blue-400", "bg-blue-500", "bg-blue-600", "bg-blue-700", "bg-blue-800", "bg-blue-900",
+        "bg-indigo-50", "bg-indigo-100", "bg-indigo-200", "bg-indigo-300", "bg-indigo-400", "bg-indigo-500", "bg-indigo-600", "bg-indigo-700", "bg-indigo-800", "bg-indigo-900",
+        "bg-purple-50", "bg-purple-100", "bg-purple-200", "bg-purple-300", "bg-purple-400", "bg-purple-500", "bg-purple-600", "bg-purple-700", "bg-purple-800", "bg-purple-900",
+        "bg-pink-50", "bg-pink-100", "bg-pink-200", "bg-pink-300", "bg-pink-400", "bg-pink-500", "bg-pink-600", "bg-pink-700", "bg-pink-800", "bg-pink-900",
       ],
       text_colors: [
         "text-transparent", "text-current", "text-black", "text-white",
-        "text-gray-500", "text-red-500", "text-yellow-500", "text-green-500",
-        "text-blue-500", "text-indigo-500", "text-purple-500", "text-pink-500",
+        "text-gray-50", "text-gray-100", "text-gray-200", "text-gray-300", "text-gray-400", "text-gray-500", "text-gray-600", "text-gray-700", "text-gray-800", "text-gray-900",
+        "text-red-50", "text-red-100", "text-red-200", "text-red-300", "text-red-400", "text-red-500", "text-red-600", "text-red-700", "text-red-800", "text-red-900",
+        "text-yellow-50", "text-yellow-100", "text-yellow-200", "text-yellow-300", "text-yellow-400", "text-yellow-500", "text-yellow-600", "text-yellow-700", "text-yellow-800", "text-yellow-900",
+        "text-green-50", "text-green-100", "text-green-200", "text-green-300", "text-green-400", "text-green-500", "text-green-600", "text-green-700", "text-green-800", "text-green-900",
+        "text-blue-50", "text-blue-100", "text-blue-200", "text-blue-300", "text-blue-400", "text-blue-500", "text-blue-600", "text-blue-700", "text-blue-800", "text-blue-900",
+        "text-indigo-50", "text-indigo-100", "text-indigo-200", "text-indigo-300", "text-indigo-400", "text-indigo-500", "text-indigo-600", "text-indigo-700", "text-indigo-800", "text-indigo-900",
+        "text-purple-50", "text-purple-100", "text-purple-200", "text-purple-300", "text-purple-400", "text-purple-500", "text-purple-600", "text-purple-700", "text-purple-800", "text-purple-900",
+        "text-pink-50", "text-pink-100", "text-pink-200", "text-pink-300", "text-pink-400", "text-pink-500", "text-pink-600", "text-pink-700", "text-pink-800", "text-pink-900",
+
       ],
       text_sizes: [
         "text-xs", "text-sm", "text-base", "text-lg",
@@ -1139,14 +1118,14 @@ export default {
       ],
       border_colors: [
         "border-transparent", "border-current", "border-black", "border-white",
-        "border-gray-50","border-gray-100","border-gray-200","border-gray-300", "border-gray-400", "border-gray-500","border-gray-600","border-gray-700","border-gray-800", "border-gray-900",
-        "border-red-50","border-red-100","border-red-200","border-red-300","border-red-400","border-red-500","border-red-600","border-red-700","border-red-800","border-red-900",
-        "border-yellow-50","border-yellow-100","border-yellow-200","border-yellow-300","border-yellow-400","border-yellow-500","border-yellow-600","border-yellow-700","border-yellow-800","border-yellow-900",
-        "border-green-50","border-green-100","border-green-200","border-green-300","border-green-400","border-green-500","border-green-600","border-green-700","border-green-800","border-green-900",
-        "border-blue-50","border-blue-100","border-blue-200","border-blue-300","border-blue-400","border-blue-500","border-blue-600","border-blue-700", "border-blue-800", "border-blue-900",
-        "border-indigo-50","border-indigo-100","border-indigo-200","border-indigo-300","border-indigo-400","border-indigo-500","border-indigo-600","border-indigo-700", "border-indigo-800", "border-indigo-900",
-        "border-purple-50","border-purple-100","border-purple-200","border-purple-300","border-purple-400","border-purple-500","border-purple-600","border-purple-700", "border-purple-800", "border-purple-900",
-        "border-pink-50","border-pink-100","border-pink-200","border-pink-300","border-pink-400","border-pink-500","border-pink-600","border-pink-700", "border-pink-800", "border-pink-900",
+        "border-gray-50", "border-gray-100", "border-gray-200", "border-gray-300", "border-gray-400", "border-gray-500", "border-gray-600", "border-gray-700", "border-gray-800", "border-gray-900",
+        "border-red-50", "border-red-100", "border-red-200", "border-red-300", "border-red-400", "border-red-500", "border-red-600", "border-red-700", "border-red-800", "border-red-900",
+        "border-yellow-50", "border-yellow-100", "border-yellow-200", "border-yellow-300", "border-yellow-400", "border-yellow-500", "border-yellow-600", "border-yellow-700", "border-yellow-800", "border-yellow-900",
+        "border-green-50", "border-green-100", "border-green-200", "border-green-300", "border-green-400", "border-green-500", "border-green-600", "border-green-700", "border-green-800", "border-green-900",
+        "border-blue-50", "border-blue-100", "border-blue-200", "border-blue-300", "border-blue-400", "border-blue-500", "border-blue-600", "border-blue-700", "border-blue-800", "border-blue-900",
+        "border-indigo-50", "border-indigo-100", "border-indigo-200", "border-indigo-300", "border-indigo-400", "border-indigo-500", "border-indigo-600", "border-indigo-700", "border-indigo-800", "border-indigo-900",
+        "border-purple-50", "border-purple-100", "border-purple-200", "border-purple-300", "border-purple-400", "border-purple-500", "border-purple-600", "border-purple-700", "border-purple-800", "border-purple-900",
+        "border-pink-50", "border-pink-100", "border-pink-200", "border-pink-300", "border-pink-400", "border-pink-500", "border-pink-600", "border-pink-700", "border-pink-800", "border-pink-900",
       ],
       border_widths: [
         "border-0", "border-2", "border-4", "border-8", "border", "border-t-0",
@@ -1182,14 +1161,14 @@ export default {
       ],
       ring_colors: [
         "ring-transparent", "ring-current", "ring-black", "ring-white",
-        "ring-gray-50","ring-gray-100","ring-gray-200","ring-gray-300", "ring-gray-400", "ring-gray-500","ring-gray-600","ring-gray-700","ring-gray-800", "ring-gray-900",
-        "ring-red-50","ring-red-100","ring-red-200","ring-red-300","ring-red-400","ring-red-500","ring-red-600","ring-red-700","ring-red-800","ring-red-900",
-        "ring-yellow-50","ring-yellow-100","ring-yellow-200","ring-yellow-300","ring-yellow-400","ring-yellow-500","ring-yellow-600","ring-yellow-700","ring-yellow-800","ring-yellow-900",
-        "ring-green-50","ring-green-100","ring-green-200","ring-green-300","ring-green-400","ring-green-500","ring-green-600","ring-green-700","ring-green-800","ring-green-900",
-        "ring-blue-50","ring-blue-100","ring-blue-200","ring-blue-300","ring-blue-400","ring-blue-500","ring-blue-600","ring-blue-700", "ring-blue-800", "ring-blue-900",
-        "ring-indigo-50","ring-indigo-100","ring-indigo-200","ring-indigo-300","ring-indigo-400","ring-indigo-500","ring-indigo-600","ring-indigo-700", "ring-indigo-800", "ring-indigo-900",
-        "ring-purple-50","ring-purple-100","ring-purple-200","ring-purple-300","ring-purple-400","ring-purple-500","ring-purple-600","ring-purple-700", "ring-purple-800", "ring-purple-900",
-        "ring-pink-50","ring-pink-100","ring-pink-200","ring-pink-300","ring-pink-400","ring-pink-500","ring-pink-600","ring-pink-700", "ring-pink-800", "ring-pink-900",
+        "ring-gray-50", "ring-gray-100", "ring-gray-200", "ring-gray-300", "ring-gray-400", "ring-gray-500", "ring-gray-600", "ring-gray-700", "ring-gray-800", "ring-gray-900",
+        "ring-red-50", "ring-red-100", "ring-red-200", "ring-red-300", "ring-red-400", "ring-red-500", "ring-red-600", "ring-red-700", "ring-red-800", "ring-red-900",
+        "ring-yellow-50", "ring-yellow-100", "ring-yellow-200", "ring-yellow-300", "ring-yellow-400", "ring-yellow-500", "ring-yellow-600", "ring-yellow-700", "ring-yellow-800", "ring-yellow-900",
+        "ring-green-50", "ring-green-100", "ring-green-200", "ring-green-300", "ring-green-400", "ring-green-500", "ring-green-600", "ring-green-700", "ring-green-800", "ring-green-900",
+        "ring-blue-50", "ring-blue-100", "ring-blue-200", "ring-blue-300", "ring-blue-400", "ring-blue-500", "ring-blue-600", "ring-blue-700", "ring-blue-800", "ring-blue-900",
+        "ring-indigo-50", "ring-indigo-100", "ring-indigo-200", "ring-indigo-300", "ring-indigo-400", "ring-indigo-500", "ring-indigo-600", "ring-indigo-700", "ring-indigo-800", "ring-indigo-900",
+        "ring-purple-50", "ring-purple-100", "ring-purple-200", "ring-purple-300", "ring-purple-400", "ring-purple-500", "ring-purple-600", "ring-purple-700", "ring-purple-800", "ring-purple-900",
+        "ring-pink-50", "ring-pink-100", "ring-pink-200", "ring-pink-300", "ring-pink-400", "ring-pink-500", "ring-pink-600", "ring-pink-700", "ring-pink-800", "ring-pink-900",
       ],
       shadows: [
         /*"*, ::before, ::after",*/ "shadow-sm", "box-shadow", "shadow",
@@ -1199,6 +1178,603 @@ export default {
       ],
       flexes: [
         "flex-row", "flex-row-reverse", "flex-col", "flex-col-reverse"
+      ],
+      positions: ["static", "fixed", "absolute", "relative", "sticky"],
+      trblis: [
+        "inset-0", "-inset-0",
+        "inset-x-0",
+        "-inset-x-0",
+        "inset-y-0",
+        "-inset-y-0",
+        "top-0",
+        "-top-0",
+        "right-0",
+        "-right-0",
+        "bottom-0",
+        "-bottom-0",
+        "left-0",
+        "-left-0",
+        "inset-px",
+        "-inset-px",
+        "inset-x-px",
+        "-inset-x-px",
+        "inset-y-px",
+        "-inset-y-px",
+        "top-px",
+        "-top-px",
+        "right-px",
+        "-right-px",
+        "bottom-px",
+        "-bottom-px",
+        "left-px",
+        "-left-px",
+        "inset-0.5",
+        "-inset-0.5",
+        "inset-x-0.5",
+        "-inset-x-0.5",
+        "inset-y-0.5",
+        "-inset-y-0.5",
+        "top-0.5",
+        "-top-0.5",
+        "right-0.5",
+        "-right-0.5",
+        "bottom-0.5",
+        "-bottom-0.5",
+        "left-0.5",
+        "-left-0.5",
+        "inset-1",
+        "-inset-1",
+        "inset-x-1",
+        "-inset-x-1",
+        "inset-y-1",
+        "-inset-y-1",
+        "top-1",
+        "-top-1",
+        "right-1",
+        "-right-1",
+        "bottom-1",
+        "-bottom-1",
+        "left-1",
+        "-left-1",
+        "inset-1.5",
+        "-inset-1.5",
+        "inset-x-1.5",
+        "-inset-x-1.5",
+        "inset-y-1.5",
+        "-inset-y-1.5",
+        "top-1.5",
+        "-top-1.5",
+        "right-1.5",
+        "-right-1.5",
+        "bottom-1.5",
+        "-bottom-1.5",
+        "left-1.5",
+        "-left-1.5",
+        "inset-2",
+        "-inset-2",
+        "inset-x-2",
+        "-inset-x-2",
+        "inset-y-2",
+        "-inset-y-2",
+        "top-2",
+        "-top-2",
+        "right-2",
+        "-right-2",
+        "bottom-2",
+        "-bottom-2",
+        "left-2",
+        "-left-2",
+        "inset-2.5",
+        "-inset-2.5",
+        "inset-x-2.5",
+        "-inset-x-2.5",
+        "inset-y-2.5",
+        "-inset-y-2.5",
+        "top-2.5",
+        "-top-2.5",
+        "right-2.5",
+        "-right-2.5",
+        "bottom-2.5",
+        "-bottom-2.5",
+        "left-2.5",
+        "-left-2.5",
+        "inset-3",
+        "-inset-3",
+        "inset-x-3",
+        "-inset-x-3",
+        "inset-y-3",
+        "-inset-y-3",
+        "top-3",
+        "-top-3",
+        "right-3",
+        "-right-3",
+        "bottom-3",
+        "-bottom-3",
+        "left-3",
+        "-left-3",
+        "inset-3.5",
+        "-inset-3.5",
+        "inset-x-3.5",
+        "-inset-x-3.5",
+        "inset-y-3.5",
+        "-inset-y-3.5",
+        "top-3.5",
+        "-top-3.5",
+        "right-3.5",
+        "-right-3.5",
+        "bottom-3.5",
+        "-bottom-3.5",
+        "left-3.5",
+        "-left-3.5",
+        "inset-4",
+        "-inset-4",
+        "inset-x-4",
+        "-inset-x-4",
+        "inset-y-4",
+        "-inset-y-4",
+        "top-4",
+        "-top-4",
+        "right-4",
+        "-right-4",
+        "bottom-4",
+        "-bottom-4",
+        "left-4",
+        "-left-4",
+        "inset-5",
+        "-inset-5",
+        "inset-x-5",
+        "-inset-x-5",
+        "inset-y-5",
+        "-inset-y-5",
+        "top-5",
+        "-top-5",
+        "right-5",
+        "-right-5",
+        "bottom-5",
+        "-bottom-5",
+        "left-5",
+        "-left-5",
+        "inset-6",
+        "-inset-6",
+        "inset-x-6",
+        "-inset-x-6",
+        "inset-y-6",
+        "-inset-y-6",
+        "top-6",
+        "-top-6",
+        "right-6",
+        "-right-6",
+        "bottom-6",
+        "-bottom-6",
+        "left-6",
+        "-left-6",
+        "inset-7",
+        "-inset-7",
+        "inset-x-7",
+        "-inset-x-7",
+        "inset-y-7",
+        "-inset-y-7",
+        "top-7",
+        "-top-7",
+        "right-7",
+        "-right-7",
+        "bottom-7",
+        "-bottom-7",
+        "left-7",
+        "-left-7",
+        "inset-8",
+        "-inset-8",
+        "inset-x-8",
+        "-inset-x-8",
+        "inset-y-8",
+        "-inset-y-8",
+        "top-8",
+        "-top-8",
+        "right-8",
+        "-right-8",
+        "bottom-8",
+        "-bottom-8",
+        "left-8",
+        "-left-8",
+        "inset-9",
+        "-inset-9",
+        "inset-x-9",
+        "-inset-x-9",
+        "inset-y-9",
+        "-inset-y-9",
+        "top-9",
+        "-top-9",
+        "right-9",
+        "-right-9",
+        "bottom-9",
+        "-bottom-9",
+        "left-9",
+        "-left-9",
+        "inset-10",
+        "-inset-10",
+        "inset-x-10",
+        "-inset-x-10",
+        "inset-y-10",
+        "-inset-y-10",
+        "top-10",
+        "-top-10",
+        "right-10",
+        "-right-10",
+        "bottom-10",
+        "-bottom-10",
+        "left-10",
+        "-left-10",
+        "inset-11",
+        "-inset-11",
+        "inset-x-11",
+        "-inset-x-11",
+        "inset-y-11",
+        "-inset-y-11",
+        "top-11",
+        "-top-11",
+        "right-11",
+        "-right-11",
+        "bottom-11",
+        "-bottom-11",
+        "left-11",
+        "-left-11",
+        "inset-12",
+        "-inset-12",
+        "inset-x-12",
+        "-inset-x-12",
+        "inset-y-12",
+        "-inset-y-12",
+        "top-12",
+        "-top-12",
+        "right-12",
+        "-right-12",
+        "bottom-12",
+        "-bottom-12",
+        "left-12",
+        "-left-12",
+        "inset-14",
+        "-inset-14",
+        "inset-x-14",
+        "-inset-x-14",
+        "inset-y-14",
+        "-inset-y-14",
+        "top-14",
+        "-top-14",
+        "right-14",
+        "-right-14",
+        "bottom-14",
+        "-bottom-14",
+        "left-14",
+        "-left-14",
+        "inset-16",
+        "-inset-16",
+        "inset-x-16",
+        "-inset-x-16",
+        "inset-y-16",
+        "-inset-y-16",
+        "top-16",
+        "-top-16",
+        "right-16",
+        "-right-16",
+        "bottom-16",
+        "-bottom-16",
+        "left-16",
+        "-left-16",
+        "inset-20",
+        "-inset-20",
+        "inset-x-20",
+        "-inset-x-20",
+        "inset-y-20",
+        "-inset-y-20",
+        "top-20",
+        "-top-20",
+        "right-20",
+        "-right-20",
+        "bottom-20",
+        "-bottom-20",
+        "left-20",
+        "-left-20",
+        "inset-24",
+        "-inset-24",
+        "inset-x-24",
+        "-inset-x-24",
+        "inset-y-24",
+        "-inset-y-24",
+        "top-24",
+        "-top-24",
+        "right-24",
+        "-right-24",
+        "bottom-24",
+        "-bottom-24",
+        "left-24",
+        "-left-24",
+        "inset-28",
+        "-inset-28",
+        "inset-x-28",
+        "-inset-x-28",
+        "inset-y-28",
+        "-inset-y-28",
+        "top-28",
+        "-top-28",
+        "right-28",
+        "-right-28",
+        "bottom-28",
+        "-bottom-28",
+        "left-28",
+        "-left-28",
+        "inset-32",
+        "-inset-32",
+        "inset-x-32",
+        "-inset-x-32",
+        "inset-y-32",
+        "-inset-y-32",
+        "top-32",
+        "-top-32",
+        "right-32",
+        "-right-32",
+        "bottom-32",
+        "-bottom-32",
+        "left-32",
+        "-left-32",
+        "inset-36",
+        "-inset-36",
+        "inset-x-36",
+        "-inset-x-36",
+        "inset-y-36",
+        "-inset-y-36",
+        "top-36",
+        "-top-36",
+        "right-36",
+        "-right-36",
+        "bottom-36",
+        "-bottom-36",
+        "left-36",
+        "-left-36",
+        "inset-40",
+        "-inset-40",
+        "inset-x-40",
+        "-inset-x-40",
+        "inset-y-40",
+        "-inset-y-40",
+        "top-40",
+        "-top-40",
+        "right-40",
+        "-right-40",
+        "bottom-40",
+        "-bottom-40",
+        "left-40",
+        "-left-40",
+        "inset-44",
+        "-inset-44",
+        "inset-x-44",
+        "-inset-x-44",
+        "inset-y-44",
+        "-inset-y-44",
+        "top-44",
+        "-top-44",
+        "right-44",
+        "-right-44",
+        "bottom-44",
+        "-bottom-44",
+        "left-44",
+        "-left-44",
+        "inset-48",
+        "-inset-48",
+        "inset-x-48",
+        "-inset-x-48",
+        "inset-y-48",
+        "-inset-y-48",
+        "top-48",
+        "-top-48",
+        "right-48",
+        "-right-48",
+        "bottom-48",
+        "-bottom-48",
+        "left-48",
+        "-left-48",
+        "inset-52",
+        "-inset-52",
+        "inset-x-52",
+        "-inset-x-52",
+        "inset-y-52",
+        "-inset-y-52",
+        "top-52",
+        "-top-52",
+        "right-52",
+        "-right-52",
+        "bottom-52",
+        "-bottom-52",
+        "left-52",
+        "-left-52",
+        "inset-56",
+        "-inset-56",
+        "inset-x-56",
+        "-inset-x-56",
+        "inset-y-56",
+        "-inset-y-56",
+        "top-56",
+        "-top-56",
+        "right-56",
+        "-right-56",
+        "bottom-56",
+        "-bottom-56",
+        "left-56",
+        "-left-56",
+        "inset-60",
+        "-inset-60",
+        "inset-x-60",
+        "-inset-x-60",
+        "inset-y-60",
+        "-inset-y-60",
+        "top-60",
+        "-top-60",
+        "right-60",
+        "-right-60",
+        "bottom-60",
+        "-bottom-60",
+        "left-60",
+        "-left-60",
+        "inset-64",
+        "-inset-64",
+        "inset-x-64",
+        "-inset-x-64",
+        "inset-y-64",
+        "-inset-y-64",
+        "top-64",
+        "-top-64",
+        "right-64",
+        "-right-64",
+        "bottom-64",
+        "-bottom-64",
+        "left-64",
+        "-left-64",
+        "inset-72",
+        "-inset-72",
+        "inset-x-72",
+        "-inset-x-72",
+        "inset-y-72",
+        "-inset-y-72",
+        "top-72",
+        "-top-72",
+        "right-72",
+        "-right-72",
+        "bottom-72",
+        "-bottom-72",
+        "left-72",
+        "-left-72",
+        "inset-80",
+        "-inset-80",
+        "inset-x-80",
+        "-inset-x-80",
+        "inset-y-80",
+        "-inset-y-80",
+        "top-80",
+        "-top-80",
+        "right-80",
+        "-right-80",
+        "bottom-80",
+        "-bottom-80",
+        "left-80",
+        "-left-80",
+        "inset-96",
+        "-inset-96",
+        "inset-x-96",
+        "-inset-x-96",
+        "inset-y-96",
+        "-inset-y-96",
+        "top-96",
+        "-top-96",
+        "right-96",
+        "-right-96",
+        "bottom-96",
+        "-bottom-96",
+        "left-96",
+        "-left-96",
+        "inset-auto",
+        "inset-1/2",
+        "inset-1/3",
+        "inset-2/3",
+        "inset-1/4",
+        "inset-2/4",
+        "inset-3/4",
+        "inset-full",
+        "-inset-1/2",
+        "-inset-1/3",
+        "-inset-2/3",
+        "-inset-1/4",
+        "-inset-2/4",
+        "-inset-3/4",
+        "-inset-full",
+        "inset-x-auto",
+        "inset-x-1/2",
+        "inset-x-1/3",
+        "inset-x-2/3",
+        "inset-x-1/4",
+        "inset-x-2/4",
+        "inset-x-3/4",
+        "inset-x-full",
+        "-inset-x-1/2",
+        "-inset-x-1/3",
+        "-inset-x-2/3",
+        "-inset-x-1/4",
+        "-inset-x-2/4",
+        "-inset-x-3/4",
+        "-inset-x-full",
+        "inset-y-auto",
+        "inset-y-1/2",
+        "inset-y-1/3",
+        "inset-y-2/3",
+        "inset-y-1/4",
+        "inset-y-2/4",
+        "inset-y-3/4",
+        "inset-y-full",
+        "-inset-y-1/2",
+        "-inset-y-1/3",
+        "-inset-y-2/3",
+        "-inset-y-1/4",
+        "-inset-y-2/4",
+        "-inset-y-3/4",
+        "-inset-y-full",
+        "top-auto",
+        "top-1/2",
+        "top-1/3",
+        "top-2/3",
+        "top-1/4",
+        "top-2/4",
+        "top-3/4",
+        "top-full",
+        "-top-1/2",
+        "-top-1/3",
+        "-top-2/3",
+        "-top-1/4",
+        "-top-2/4",
+        "-top-3/4",
+        "-top-full",
+        "right-auto",
+        "right-1/2",
+        "right-1/3",
+        "right-2/3",
+        "right-1/4",
+        "right-2/4",
+        "right-3/4",
+        "right-full",
+        "-right-1/2",
+        "-right-1/3",
+        "-right-2/3",
+        "-right-1/4",
+        "-right-2/4",
+        "-right-3/4",
+        "-right-full",
+        "bottom-auto",
+        "bottom-1/2",
+        "bottom-1/3",
+        "bottom-2/3",
+        "bottom-1/4",
+        "bottom-2/4",
+        "bottom-3/4",
+        "bottom-full",
+        "-bottom-1/2",
+        "-bottom-1/3",
+        "-bottom-2/3",
+        "-bottom-1/4",
+        "-bottom-2/4",
+        "-bottom-3/4",
+        "-bottom-full",
+        "left-auto",
+        "left-1/2",
+        "left-1/3",
+        "left-2/3",
+        "left-1/4",
+        "left-2/4",
+        "left-3/4",
+        "left-full",
+        "-left-1/2",
+        "-left-1/3",
+        "-left-2/3",
+        "-left-1/4",
+        "-left-2/4",
+        "-left-3/4",
+        "-left-full"
       ]
     };
   },
@@ -1249,26 +1825,23 @@ export default {
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      }
-      else if (style_to_apply === "border-width") {
+      } else if (style_to_apply === "border-width") {
         //classes = classes.replace(/(^|\s)border-?[trbl]?-?\d?/gim, " " + class_to_add + " ");
         //let elem_classes = $(this.selected_element).attr("class").split(/\s+/)
 
-        for(let border_width in this.border_widths){
+        for (let border_width in this.border_widths) {
           classes.replace(/this.border_widths[border_width]/gim, '');
           console.log(this.border_widths[border_width])
         }
 
         classes += " " + class_to_add;
-      }
-      else if (style_to_apply === "border-style") {
+      } else if (style_to_apply === "border-style") {
         classes = classes.replace(/(^|\s)border-\w+/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      }
-      else if (style_to_apply === "ring-color") {
+      } else if (style_to_apply === "ring-color") {
         classes = classes.replace(/(^|\s)ring-\w+-\d+/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
@@ -1292,15 +1865,13 @@ export default {
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      }
-      else if (style_to_apply === "shadow") {
+      } else if (style_to_apply === "shadow") {
         classes = classes.replace(/(^|\s)(box-)?shadow-?(\w+)?/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      }
-      else if (style_to_apply === "rounded") {
+      } else if (style_to_apply === "rounded") {
         classes = classes.replace(/(^|\s)rounded-?(\d+|\w+)?-?(\d+|\w+)?(\d+|\w+)?/gim, " " + class_to_add + " ");
 
         if (classes.indexOf(class_to_add) === -1) {
@@ -1455,6 +2026,9 @@ export default {
 
         $("#draggable-items-container").find('*')/*.children()*/.removeClass('selected-element')
         $(e.target).addClass('selected-element')
+        setTimeout(function () {
+          $(e.target).removeClass('selected-element')
+        }, 1000)
 
         self.selected_element_classes = $(e.target).attr('class')
         return false;
