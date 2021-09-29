@@ -133,7 +133,7 @@
         class="droppable min-h-full w-full border hidden"
     ></div>
 
-    <div class="px-4 pb-4 flex flex-col space-y-4 col-span-8 lg:col-span-2 h-screen overflow-y-auto">
+    <div class="px-4 pb-4 flex flex-col space-y-4 col-span-8 lg:col-span-2">
       <div class="border border-gray-300 divide-x divide-gray-500 flex items-center space-x-2 p-2 rounded-md">
         <button @click="duplicate_element">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,10 +164,24 @@
       <!--      <textarea id="selected_element_classes"
                   class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
                   placeholder="Classes"></textarea>-->
-      <div id="selected_element_classes"></div>
-      <input type="text" v-model="selected_element_inner_html"
+      <div id="selected_element_classes" class="hidden"></div>
+      <div class="overflow-hidden border border-gray-300 rounded-md text-gray-500 text-xs">
+        <h3 class="py-1 px-2 bg-gray-100">Classes</h3>
+        <div class="flex flex-wrap gap-2 p-2">
+          <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none" placeholder="Write class name">
+          <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
+            <button v-if="class_name.length > 0 && !/selected-element|ui/.test(class_name)" v-on:click="remove_class(class_name)" class="flex rounded-full bg-indigo-500 text-white pl-2 items-center">
+              .{{ class_name }}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </template>
+        </div>
+      </div>
+      <textarea v-model="selected_element_inner_html"
              class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
-             placeholder="HTML">
+                placeholder="HTML"></textarea>
       <textarea id="element-html" v-model="selected_element_html" class="border border-black hidden"
                 @keyup="element_html_change"></textarea>
       <!-- <div>
@@ -344,32 +358,6 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Border</h3>
-        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1 hidden">
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
-            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
-            <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
-            <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-          <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
-            <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
-              <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
-            </select>
-          </div>
-        </div>
         <div class="flex col-span-3 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/3">
             <label for="border-color" class="text-xs font-semibold text-gray-500 my-1">Color</label>
@@ -469,8 +457,8 @@
             </select>
           </div>
           <div class="flex flex-col w-1/2">
-            <label for="inset-position" class="text-xs font-semibold text-gray-500 my-1">Inset</label>
-            <select id="inset-position" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <label for="position-inset" class="text-xs font-semibold text-gray-500 my-1">Inset</label>
+            <select id="position-inset" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <template v-for="trbli in trblis" :key="trbli">
                 <option v-if="/inset/gi.test(trbli)">{{ trbli }}</option>
               </template>
@@ -1782,6 +1770,18 @@ export default {
     apply_style() {
       console.log('apply style')
     },
+    remove_class(class_name){
+      if (this.selected_element === null) {
+        //alert("To apply designs select one element by right clicking.");
+        this.openModal()
+        return;
+      }
+
+      $(this.selected_element).removeClass(class_name)
+
+      this.selected_element_html = $(this.selected_element).prop("outerHTML")
+      this.selected_element_classes = $(this.selected_element).attr("class")
+    },
     add_class(event) {
       if (this.selected_element === null) {
         //alert("To apply designs select one element by right clicking.");
@@ -1800,14 +1800,32 @@ export default {
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      } else if (style_to_apply === "mt") {
+      }
+      else if (style_to_apply === "position-type") {
+        for (let index in this.positions) {
+          let re = new RegExp(this.positions[index], 'gim');
+          classes = classes.replace(re, '');
+        }
+        classes += " " + class_to_add;
+      }
+      else if (style_to_apply === "position-inset") {
+        for (let index in this.trblis) {
+          if(/inset/g.test(this.trblis[index])) {
+            let re = new RegExp(this.trblis[index], 'gim');
+            classes = classes.replace(re, '');
+          }
+        }
+        classes += " " + class_to_add;
+      }
+      else if (style_to_apply === "mt") {
         //classes = classes.replace(/m-\d+/gim, class_to_add);
         classes = classes.replace(/mt-\d+/gim, class_to_add);
 
         if (classes.indexOf(class_to_add) === -1) {
           classes += " " + class_to_add + " ";
         }
-      } else if (style_to_apply === "bg") {
+      }
+      else if (style_to_apply === "bg") {
         classes = classes.replace(/bg-\w+(-\d+)?/gim, class_to_add);
 
         if (classes.indexOf(class_to_add) === -1) {
@@ -1878,12 +1896,20 @@ export default {
           classes += " " + class_to_add + " ";
         }
       }
+      else if(style_to_apply === "add-class"){
+        /*if (classes.indexOf(class_to_add) === -1) {
+          classes += " " + class_to_add + " ";
+        }*/
+        classes += " " + class_to_add + " ";
+        $(event.currentTarget).val('')
+      }
 
+      classes = classes.replace(/\s+/gim, " ");
       console.log(class_to_add, classes);
       $(this.selected_element).attr("class", classes);
 
       this.selected_element_html = $(this.selected_element).prop("outerHTML")
-      this.selected_element_classes = $(this.selected_element).attr("class")
+      this.selected_element_classes = classes //$(this.selected_element).attr("class")
     },
 
     //let new_classes = ""
@@ -1949,7 +1975,7 @@ export default {
         element = document.createElement("div");
         $(element)
             .addClass(
-                "m-2 p-2 flex flex-col gap-4 border border-gray-200 droppable-flex-container"
+                "m-2 p-4 flex flex-col gap-4 border border-gray-200 droppable-flex-container"
             )
             /* .droppable({
               accept: ".draggable",
