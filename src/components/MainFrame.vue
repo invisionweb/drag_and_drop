@@ -20,7 +20,7 @@
         </svg>
         Clear canvas
       </button>
-      <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
+<!--      <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
               title="Preview" @click="clear_canvas">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
              class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 16 16">
@@ -28,7 +28,7 @@
               d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z"/>
         </svg>
         Preview
-      </button>
+      </button>-->
       <button
           class="inline-flex text-sm items-center p-2 rounded-md font-medium bg-indigo-600 hover:bg-indigo-400 text-white"
           title="Get code" @click="get_code">
@@ -37,7 +37,7 @@
           <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round"
                 stroke-width="2"/>
         </svg>
-        Code
+        Create code
       </button>
       <!-- <button @click="clear_canvas">Preview</button>-->
     </div>
@@ -81,7 +81,7 @@
               stroke-width="2"/>
         </svg>
       </div>
-      <div id="table" class="p-2 draggable cursor-move select-none">
+      <div id="table" class="p-2 draggable cursor-move select-none hidden">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
           <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -95,7 +95,7 @@
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
         </div>
       </div>
-      <div id="list" class="p-2 draggable cursor-move select-none">
+      <div id="list" class="p-2 draggable cursor-move select-none hidden">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
           <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -109,7 +109,7 @@
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
         </div>
       </div>
-      <div id="add-element" class="p-2 draggable cursor-move select-none">
+      <div id="add-element" class="p-2 draggable cursor-move select-none hidden">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
           <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -124,14 +124,18 @@
         </div>
       </div>
     </div>
-    <div
-        id="draggable-items-container"
-        class="border border-dashed col-span-8 lg:col-span-5"
-    ></div>
-    <div
-        id="main-canvas"
-        class="droppable min-h-full w-full border hidden"
-    ></div>
+    <div class="col-span-8 lg:col-span-5 lg:pl-4">
+
+      <div class="bg-yellow-50 text-sm text-gray-500 py-2 px-4 inline-flex items-center gap-2 rounded-md w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+        </svg>
+        <span>Drag and drop HTML elements in the canvas using cursor.</span>
+      </div>
+
+      <div id="draggable-items-container" class="border border-dashed min-h-screen my-4 sticky top-4"></div>
+      <div id="main-canvas" class="droppable min-h-full w-full border hidden"></div>
+    </div>
 
     <div class="px-4 pb-4 flex flex-col space-y-4 col-span-8 lg:col-span-2">
       <div class="border border-gray-300 divide-x divide-gray-500 flex items-center space-x-2 p-2 rounded-md">
@@ -150,7 +154,7 @@
                 stroke-width="2"/>
           </svg>
         </button>
-        <button class="pl-2" @click="remove_frame_border">
+        <button class="pl-2 hidden" @click="remove_frame_border">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square"
                viewBox="0 0 16 16">
             <path
