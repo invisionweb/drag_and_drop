@@ -2,11 +2,13 @@
   <div class="flex flex-col lg:flex-row p-6 gap-4 lg:justify-between">
     <div class="flex space-x-2 justify-center items-center">
       <h1 class="lg:text-2xl font-medium text-gray-500">UI Builder for</h1>
-      <img
-          alt="TailwindCSS"
-          class="h-6 w-auto"
-          src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg"
-      />
+      <a href="https://tailwindcss.com" target="_blank">
+        <img
+            alt="TailwindCSS"
+            class="h-6 w-auto"
+            src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg"
+        />
+      </a>
     </div>
     <div class="flex flex-row space-x-2 justify-center">
       <button class="inline-flex text-sm items-center border p-2 rounded-md font-medium hover:bg-gray-200"
@@ -46,6 +48,16 @@
   <div class="grid grid-cols-8">
     <div class="flex flex-col col-span-8 lg:col-span-1 p-2 bg-gray-50" title="Drag Elements to canvas">
       <!-- <div class="draggable cursor-move select-none">Container</div> -->
+      <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
+      <div id="flex" class="p-2 draggable cursor-move select-none">
+        <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
+          <div
+              class="rounded-md text-white font-extrabold text-center border-2 border-dashed border-black h-6 w-6"></div>
+          <span class="text-xs text-gray-500">Container</span>
+          <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
+        </div>
+      </div>
       <div id="text" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
         <svg class="bi bi-textarea-t" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
              xmlns="http://www.w3.org/2000/svg">
@@ -62,16 +74,6 @@
       <div id="input" class="p-2 draggable cursor-move select-none">
         <input class="w-full text-xs border border-indigo-600 outline-none rounded p-2" placeholder="Write here"
                type="text">
-      </div>
-      <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
-      <div id="flex" class="p-2 draggable cursor-move select-none">
-        <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div
-              class="rounded-md text-white font-extrabold text-center border-2 border-dashed border-black h-6 w-6"></div>
-          <span class="text-xs text-gray-500">Container</span>
-          <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
-          <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
-        </div>
       </div>
       <div id="img" class="p-1 draggable cursor-move select-none text-indigo-700">
         <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -126,15 +128,34 @@
     </div>
     <div class="col-span-8 lg:col-span-5 lg:pl-4">
 
-      <div class="bg-yellow-50 text-sm text-gray-500 py-2 px-4 inline-flex items-center gap-2 rounded-md w-full">
+      <div class="sticky top-4 p-4 lg:p-0">
+
+      <div class="bg-yellow-50 text-sm text-gray-500 py-2 mb-4 px-4 inline-flex items-center gap-2 rounded-md w-full">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
         </svg>
         <span>Drag and drop HTML elements in the canvas using cursor.</span>
       </div>
 
-      <div id="draggable-items-container" class="border border-dashed min-h-screen my-4 sticky top-4"></div>
-      <div id="main-canvas" class="droppable min-h-full w-full border hidden"></div>
+        <div class="overflow-hidden border border-gray-300 rounded-md text-gray-500 text-xs">
+          <h3 class="py-1 px-2 bg-gray-100">Tailwind Classes</h3>
+          <div class="flex flex-wrap gap-2 p-2">
+            <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none" placeholder="Write class name">
+            <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
+              <button v-if="class_name.length > 0 && !/selected-element|ui|droppable-flex-container/.test(class_name)" v-on:click="remove_class(class_name)" class="flex rounded-full bg-indigo-500 hover:bg-red-500 text-white pl-2 items-center">
+                .{{ class_name }}
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </template>
+          </div>
+        </div>
+
+        <div id="draggable-items-container" class="border border-dashed overflow-y-auto h-96 my-4"></div>
+        <div id="main-canvas" class="droppable min-h-full w-full border hidden"></div>
+      </div>
+
     </div>
 
     <div class="px-4 pb-4 flex flex-col space-y-4 col-span-8 lg:col-span-2">
@@ -169,20 +190,6 @@
                   class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
                   placeholder="Classes"></textarea>-->
       <div id="selected_element_classes" class="hidden"></div>
-      <div class="overflow-hidden border border-gray-300 rounded-md text-gray-500 text-xs">
-        <h3 class="py-1 px-2 bg-gray-100">Classes</h3>
-        <div class="flex flex-wrap gap-2 p-2">
-          <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none" placeholder="Write class name">
-          <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
-            <button v-if="class_name.length > 0 && !/selected-element|ui|droppable-flex-container/.test(class_name)" v-on:click="remove_class(class_name)" class="flex rounded-full bg-indigo-500 hover:bg-red-500 text-white pl-2 items-center">
-              .{{ class_name }}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-              </svg>
-            </button>
-          </template>
-        </div>
-      </div>
       <textarea v-model="selected_element_inner_html"
              class="w-full border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
                 placeholder="HTML"></textarea>
@@ -195,8 +202,7 @@
         <h3 class="py-1 px-2 bg-gray-100">Flex</h3>
 
         <div>
-          <button data-template="flex-direction" class="w-full p-2 hover:bg-indigo-50 properties">Flex direction
-          </button>
+          <button data-template="flex-direction" class="w-full p-2 hover:bg-indigo-50 properties">Flex direction</button>
         </div>
         <div class="hidden">
           <div id="flex-direction">
