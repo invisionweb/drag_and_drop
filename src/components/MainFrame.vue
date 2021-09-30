@@ -270,7 +270,7 @@
         <h3 class="py-1 px-2 bg-gray-100">Margin</h3>
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <label for="mt" class="text-xs font-semibold text-gray-500 my-1">Top</label>
             <select id="mt" @change="add_class"
                     class="appearance-none bg-white text-xs border border-gray-300 px-2 py-1 w-full">
               <template v-for="margin in margins" :key="margin">
@@ -279,19 +279,19 @@
             </select>
           </div>
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <label for="mr" class="text-xs font-semibold text-gray-500 my-1">Right</label>
             <select id="mr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="margin in margins" :key="margin">{{ margin }}</option>
             </select>
           </div>
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <label for="mb" class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
             <select id="mb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="margin in margins" :key="margin">{{ margin }}</option>
             </select>
           </div>
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <label for="ml" class="text-xs font-semibold text-gray-500 my-1">Left</label>
             <select id="ml" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="margin in margins" :key="margin">{{ margin }}</option>
             </select>
@@ -303,25 +303,25 @@
         <h3 class="py-1 px-2 bg-gray-100">Padding</h3>
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Top</label>
-            <select id="p" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <label for="pt" class="text-xs font-semibold text-gray-500 my-1">Top</label>
+            <select id="pt" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
             </select>
           </div>
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Right</label>
+            <label for="pr" class="text-xs font-semibold text-gray-500 my-1">Right</label>
             <select id="pr" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
             </select>
           </div>
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
+            <label for="pb" class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
             <select id="pb" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
             </select>
           </div>
           <div class="flex flex-col w-1/4">
-            <label class="text-xs font-semibold text-gray-500 my-1">Left</label>
+            <label for="pl" class="text-xs font-semibold text-gray-500 my-1">Left</label>
             <select id="pl" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="pading in paddings" :key="pading">{{ pading }}</option>
             </select>
@@ -331,22 +331,29 @@
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
         <h3 class="py-1 px-2 bg-gray-100">Text style</h3>
-        <div class="flex col-span-3 px-2 pb-2 pt-1 gap-1">
-          <div class="flex flex-col w-1/3">
+        <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
+          <div class="flex flex-col w-1/4">
+            <label for="text-size" class="text-xs font-semibold text-gray-500 my-1">Size</label>
+            <select id="text-size" @change="add_class"
+                    class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+              <option v-for="class_name in text_sizes" :key="class_name">{{ class_name }}</option>
+            </select>
+          </div>
+          <div class="flex flex-col w-1/4">
             <label for="text-color" class="text-xs font-semibold text-gray-500 my-1">Color</label>
             <select id="text-color" @change="add_class"
                     class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="class_name in text_colors" :key="class_name">{{ class_name }}</option>
             </select>
           </div>
-          <div class="flex flex-col w-1/3">
+          <div class="flex flex-col w-1/4">
             <label for="text-font" class="text-xs font-semibold text-gray-500 my-1">Font</label>
             <select id="text-font" @change="add_class"
                     class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <option v-for="class_name in font_families" :key="class_name">{{ class_name }}</option>
             </select>
           </div>
-          <div class="flex flex-col w-1/3">
+          <div class="flex flex-col w-1/4">
             <label for="text-weight" class="text-xs font-semibold text-gray-500 my-1">Weight</label>
             <select id="text-weight" @change="add_class"
                     class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
@@ -1794,12 +1801,11 @@ export default {
 
       let style_to_apply = $(event.currentTarget).attr("id");
 
-      if (style_to_apply === "p") {
-        classes = classes.replace(/(^|\s)p-\d+/gim, class_to_add);
-
-        if (classes.indexOf(class_to_add) === -1) {
-          classes += " " + class_to_add + " ";
-        }
+      if (/pt|pr|pb|pl/gim.test(style_to_apply)) {
+        classes += " " + class_to_add;
+      }
+      else if (/mt|mr|mb|ml/gim.test(style_to_apply)) {
+        classes += " " + class_to_add;
       }
       else if (style_to_apply === "position-type") {
         for (let index in this.positions) {
@@ -1826,6 +1832,13 @@ export default {
           }
 
           classes += " " + class_to_add;
+      }
+      else if(/text-size/.test(style_to_apply)){
+        for (let index in this.text_sizes) {
+          classes = classes.replace(new RegExp(this.text_sizes[index], 'gim'), "");
+        }
+
+        classes += " " + class_to_add;
       }
       else if (/text-weight/g.test(style_to_apply)) {
         for (let index in this.font_weights) {
