@@ -170,7 +170,7 @@
         <div class="flex flex-wrap gap-2 p-2">
           <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none" placeholder="Write class name">
           <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
-            <button v-if="class_name.length > 0 && !/selected-element|ui/.test(class_name)" v-on:click="remove_class(class_name)" class="flex rounded-full bg-indigo-500 text-white pl-2 items-center">
+            <button v-if="class_name.length > 0 && !/selected-element|ui|droppable-flex-container/.test(class_name)" v-on:click="remove_class(class_name)" class="flex rounded-full bg-indigo-500 hover:bg-red-500 text-white pl-2 items-center">
               .{{ class_name }}
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
@@ -180,7 +180,7 @@
         </div>
       </div>
       <textarea v-model="selected_element_inner_html"
-             class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
+             class="w-full border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
                 placeholder="HTML"></textarea>
       <textarea id="element-html" v-model="selected_element_html" class="border border-black hidden"
                 @keyup="element_html_change"></textarea>
@@ -458,7 +458,7 @@
           </div>
           <div class="flex flex-col w-1/2">
             <label for="position-inset" class="text-xs font-semibold text-gray-500 my-1">Inset</label>
-            <select id="position-inset" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select data-regex="inset" id="position-inset" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <template v-for="trbli in trblis" :key="trbli">
                 <option v-if="/inset/gi.test(trbli)">{{ trbli }}</option>
               </template>
@@ -468,7 +468,7 @@
         <div class="flex col-span-4 px-2 pb-2 pt-1 gap-1">
           <div class="flex flex-col w-1/4">
             <label for="position-top" class="text-xs font-semibold text-gray-500 my-1">Top</label>
-            <select id="position-top" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select data-regex="top" id="position-top" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <template v-for="trbli in trblis" :key="trbli">
                 <option v-if="/top/gi.test(trbli)">{{ trbli }}</option>
               </template>
@@ -476,7 +476,7 @@
           </div>
           <div class="flex flex-col w-1/4">
             <label for="position-right" class="text-xs font-semibold text-gray-500 my-1">Right</label>
-            <select id="position-right" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select data-regex="right" id="position-right" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <template v-for="trbli in trblis" :key="trbli">
                 <option v-if="/right/gi.test(trbli)">{{ trbli }}</option>
               </template>
@@ -484,7 +484,7 @@
           </div>
           <div class="flex flex-col w-1/4">
             <label for="position-bottom" class="text-xs font-semibold text-gray-500 my-1">Bottom</label>
-            <select id="position-bottom" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select data-regex="bottom" id="position-bottom" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <template v-for="trbli in trblis" :key="trbli">
                 <option v-if="/bottom/gi.test(trbli)">{{ trbli }}</option>
               </template>
@@ -492,7 +492,7 @@
           </div>
           <div class="flex flex-col w-1/4">
             <label for="position-left" class="text-xs font-semibold text-gray-500 my-1">Left</label>
-            <select id="position-left" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
+            <select data-regex="left" id="position-left" @change="add_class" class="appearance-none text-xs border border-gray-300 px-2 py-1 w-full">
               <template v-for="trbli in trblis" :key="trbli">
                 <option v-if="/left/gi.test(trbli)">{{ trbli }}</option>
               </template>
@@ -1808,13 +1808,30 @@ export default {
         }
         classes += " " + class_to_add;
       }
-      else if (style_to_apply === "position-inset") {
+      else if (/position-(inset|top|right|bottom|left)/g.test(style_to_apply)) {
+        let regex_data = $(event.currentTarget).attr("data-regex")
+
         for (let index in this.trblis) {
-          if(/inset/g.test(this.trblis[index])) {
+          if(new RegExp(regex_data).test(this.trblis[index])) {
             let re = new RegExp(this.trblis[index], 'gim');
             classes = classes.replace(re, '');
           }
         }
+        classes += " " + class_to_add;
+      }
+      // if id="text-font"
+      else if (/text-font/g.test(style_to_apply)) {
+          for (let index in this.font_families) {
+            classes = classes.replace(new RegExp(this.font_families[index], 'gim'), "");
+          }
+
+          classes += " " + class_to_add;
+      }
+      else if (/text-weight/g.test(style_to_apply)) {
+        for (let index in this.font_weights) {
+          classes = classes.replace(new RegExp(this.font_weights[index], 'gim'), "");
+        }
+
         classes += " " + class_to_add;
       }
       else if (style_to_apply === "mt") {
