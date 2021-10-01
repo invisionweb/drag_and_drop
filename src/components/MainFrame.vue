@@ -49,16 +49,15 @@
     <div class="flex flex-col col-span-8 lg:col-span-1 p-2 bg-gray-50" title="Drag Elements to canvas">
       <!-- <div class="draggable cursor-move select-none">Container</div> -->
       <!-- <div class="draggable cursor-move select-none" id="grid">Grid</div> -->
-      <div id="flex" class="p-2 draggable cursor-move select-none">
+      <div id="flex" class="p-2 draggable select-none" @click="add_element">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
-          <div
-              class="rounded-md text-white font-extrabold text-center border-2 border-dashed border-black h-6 w-6"></div>
+          <div class="rounded-md text-white font-extrabold text-center border-2 border-dashed border-black h-6 w-6"></div>
           <span class="text-xs text-gray-500">Container</span>
           <!-- <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
         </div>
       </div>
-      <div id="text" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
+      <div id="text" @click="add_element" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
         <svg class="bi bi-textarea-t" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
              xmlns="http://www.w3.org/2000/svg">
           <path
@@ -68,14 +67,15 @@
         </svg>
         <span class="ml-2">TEXT</span>
       </div>
-      <div id="button" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
+      <div id="button" @click="add_element" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
         <button class="bg-black text-white text-xs p-2 rounded-md">Button</button>
       </div>
       <div id="input" class="p-2 draggable cursor-move select-none">
-        <input class="w-full text-xs border border-indigo-600 outline-none rounded p-2" placeholder="Write here"
-               type="text">
+        <div class="w-full text-xs border border-indigo-600 outline-none rounded p-2">
+          Input field
+        </div>
       </div>
-      <div id="img" class="p-1 draggable cursor-move select-none text-indigo-700">
+      <div id="img" @click="add_element" class="p-1 draggable cursor-move select-none text-indigo-700">
         <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
@@ -83,7 +83,7 @@
               stroke-width="2"/>
         </svg>
       </div>
-      <div id="table" class="p-2 draggable cursor-move select-none hidden">
+      <div id="table" @click="add_element" class="p-2 draggable cursor-move select-none hidden">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
           <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -137,7 +137,7 @@
         <span>Drag and drop HTML elements in the canvas using cursor.</span>
       </div>
 
-        <div class="overflow-hidden border border-gray-300 rounded-md text-gray-500 text-xs">
+        <div class="overflow-hidden bg-white border border-gray-300 rounded-md text-gray-500 text-xs">
           <h3 class="py-1 px-2 bg-gray-100">Tailwind Classes</h3>
           <div class="flex flex-wrap gap-2 p-2">
             <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none" placeholder="Write class name">
@@ -1951,6 +1951,18 @@ export default {
       this.selected_element_html = $(this.selected_element).prop("outerHTML")
       this.selected_element_classes = classes //$(this.selected_element).attr("class")
     },
+    add_element(event){
+      if (this.selected_element === null) {
+        //alert("To apply designs select one element by right clicking.");
+        this.openModal()
+        return;
+      }
+
+      let element_id = $(event.currentTarget).attr("id");
+      this.dragging_element_name = element_id
+
+      $(this.selected_element).append(this.create_dropped_element())
+    },
 
     //let new_classes = ""
     /* $.each(classes, function(item) {
@@ -2079,7 +2091,7 @@ export default {
         console.log("right clicked", $(e.target).attr("class"));
         $("#element").text( $(e.target).prop('tagName') )
         */
-        self.isOpen = true
+        alert('Click on an element to add inside')
         return false;
       });
 
@@ -2150,7 +2162,7 @@ export default {
       });
 
       $("#draggable-items-container").sortable({
-        placeholder: "border-2 border-dashed border-yellow-400 m-2 p-4",
+        placeholder: "container-frame", //"border-2 border-dashed border-yellow-400 m-2 p-4",
         cancel: false,
         //accept: ".draggable",
         //revert: true,

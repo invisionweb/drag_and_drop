@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 .selected-element {
-    @apply ring-1 ring-indigo-400;
+    @apply ring ring-indigo-500;
 }
 .container-frame {
-    @apply ring ring-gray-200 m-2 p-4;
+    @apply ring ring-indigo-500;
 }
