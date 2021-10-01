@@ -57,7 +57,7 @@
           <div class="rounded-md text-white font-extrabold text-center bg-indigo-400 h-6 w-6"></div>-->
         </div>
       </div>
-      <div id="text" @click="add_element" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
+      <div id="text" @click="add_element" class="p-2 draggable select-none inline-flex items-center text-sm text-gray-500">
         <svg class="bi bi-textarea-t" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
              xmlns="http://www.w3.org/2000/svg">
           <path
@@ -67,7 +67,7 @@
         </svg>
         <span class="ml-2">TEXT</span>
       </div>
-      <div id="button" @click="add_element" class="p-2 draggable cursor-move select-none inline-flex items-center text-sm text-gray-500">
+      <div id="button" @click="add_element" class="p-2 draggable select-none inline-flex items-center text-sm text-gray-500">
         <button class="bg-black text-white text-xs p-2 rounded-md">Button</button>
       </div>
       <div id="input" class="p-2 draggable cursor-move select-none">
@@ -75,7 +75,7 @@
           Input field
         </div>
       </div>
-      <div id="img" @click="add_element" class="p-1 draggable cursor-move select-none text-indigo-700">
+      <div id="img" @click="add_element" class="p-1 draggable select-none text-indigo-700">
         <svg class="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
