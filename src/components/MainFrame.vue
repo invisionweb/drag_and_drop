@@ -691,6 +691,7 @@ export default {
       codemirror_classes_editor: null,
       code_editor: null,
       selected_element: null,
+      right_clicked_element: null,
       selected_element_html: "",
       selected_element_inner_html: "",
       selected_element_classes: "",
@@ -2089,7 +2090,15 @@ export default {
 
       //$(this).append(this.create_dropped_element(self.dragging_element_name)); //element
       $(element).contextmenu(function () {
+        if (self.right_clicked_element === null) {
+          self.right_clicked_element = element
 
+          self.modal_message = 'Click an element inside the canvas to add inside this element. Right click again to revert.'
+          self.openModal()
+        }
+        else{
+          self.right_clicked_element = null
+        }
         return false;
       });
 
@@ -2107,6 +2116,12 @@ export default {
         }, 1000)
 
         self.selected_element_classes = $(e.target).attr('class')
+
+        if (self.right_clicked_element !== null) {
+          $(self.right_clicked_element).append(e.target)
+          self.right_clicked_element = null
+        }
+
         return false;
       });
 
