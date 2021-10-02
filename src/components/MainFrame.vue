@@ -2006,28 +2006,27 @@ export default {
       let element;
       if (self.dragging_element_name === "input") {
         element = document.createElement("input");
-        $(element).addClass("m-2 p-2 border rounded-md");
+        $(element).addClass("p-2 border rounded-md");
       } else if (self.dragging_element_name === "text") {
         element = document.createElement("p");
         $(element)
             .text("You have just dropped a text element. Edit text by selecting this element.")
-            .addClass("p-2 m-2 text-gray-600");
+            .addClass("text-gray-600");
       } else if (self.dragging_element_name === "button") {
         element = document.createElement("button");
         $(element)
             .text("Button")
-            .addClass("m-2 bg-black text-white py-2 px-4 rounded-md")
+            .addClass("bg-black text-white py-2 px-4 rounded-md")
         //.attr('title', 'BUTTON Element')
       } else if (self.dragging_element_name === "img") {
         element = document.createElement("img");
-        $(element)
-            .attr('src', "https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg")
-            .addClass("m-2");
+        $(element).attr('src', "https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg")
+            //.addClass("m-2");
       } else if (self.dragging_element_name === "flex") {
         element = document.createElement("div");
         $(element)
             .addClass(
-                "m-2 p-4 flex flex-col gap-4 border border-gray-200 droppable-flex-container"
+                "p-4 flex flex-col border border-gray-200 droppable-flex-container"
             )
             /* .droppable({
               accept: ".draggable",
@@ -2103,7 +2102,7 @@ export default {
         self.selected_element_html = $(e.target).prop('outerHTML')
 
         $("#draggable-items-container").find('*')/*.children()*/.removeClass('selected-element')
-        $(e.target).addClass('selected-element')
+        $(e.target).addClass('selected-element').removeClass('container-frame')
         setTimeout(function () {
           $(e.target).removeClass('selected-element')
         }, 1000)
@@ -2111,6 +2110,12 @@ export default {
         self.selected_element_classes = $(e.target).attr('class')
         return false;
       });
+
+      $(element).hover(function (){
+        $(element).addClass('container-frame')
+      }).mouseleave(function(){
+        $(element).removeClass('container-frame')
+      })
 
       /*tippy(element, {
         //content: $(element).prop('outerHTML'),
@@ -2457,7 +2462,13 @@ export default {
         content(reference) {
           const id = reference.getAttribute('data-template');
           const template = document.getElementById(id);
-          return template.innerHTML;
+console.log(template)
+          let element = document.createElement("div");
+$(element).html(template).click(function(){
+  reference._tippy.hide()
+})
+return element
+          //return template.innerHTML;
         },
         theme: 'light-border',
         allowHTML: true,
