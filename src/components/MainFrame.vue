@@ -138,7 +138,7 @@
       </div>
 
         <div class="overflow-hidden bg-white border border-gray-300 rounded-md text-gray-500 text-xs">
-          <h3 class="py-1 px-2 bg-gray-100">Tailwind Classes</h3>
+          <h3 class="py-1 px-2 bg-gray-100"><span id="element" class="hidden"></span> Tailwind Classes</h3>
           <div class="flex flex-wrap gap-2 p-2">
             <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none" placeholder="Write class name">
             <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
@@ -185,7 +185,6 @@
           </svg>
         </button>
       </div>
-      <div id="element" class="hidden"></div>
       <!--      <textarea id="selected_element_classes"
                   class="border border-gray-300 outline-none p-2 rounded-md text-gray-500 text-sm"
                   placeholder="Classes"></textarea>-->
@@ -597,7 +596,7 @@
                             </DialogTitle>-->
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
-                  Click on an element inside the canvas to apply design.
+                  {{ modal_message }}
                 </p>
               </div>
 
@@ -672,6 +671,7 @@ export default {
 
     return {
       isOpen,
+      modal_message: '',
 
       closeModal() {
         isOpen.value = false
@@ -1787,9 +1787,12 @@ export default {
     apply_style() {
       console.log('apply style')
     },
+    randomImage(){
+      return "https://source.unsplash.com/random"
+    },
     remove_class(class_name){
       if (this.selected_element === null) {
-        //alert("To apply designs select one element by right clicking.");
+        this.modal_message = 'Click and select an element inside the canvas to apply design.'
         this.openModal()
         return;
       }
@@ -1801,7 +1804,7 @@ export default {
     },
     add_class(event) {
       if (this.selected_element === null) {
-        //alert("To apply designs select one element by right clicking.");
+        this.modal_message = 'Click and select an element inside the canvas to apply design.'
         this.openModal()
         return;
       }
@@ -1954,6 +1957,7 @@ export default {
     add_element(event){
       if (this.selected_element === null) {
         //alert("To apply designs select one element by right clicking.");
+        this.modal_message = 'Click and select an element inside the canvas to add element.'
         this.openModal()
         return;
       }
@@ -2020,8 +2024,8 @@ export default {
         //.attr('title', 'BUTTON Element')
       } else if (self.dragging_element_name === "img") {
         element = document.createElement("img");
-        $(element).attr('src', "https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg")
-            //.addClass("m-2");
+        $(element).attr('src', self.randomImage())
+            .addClass("w-64 rounded-md");
       } else if (self.dragging_element_name === "flex") {
         element = document.createElement("div");
         $(element)
@@ -2085,19 +2089,14 @@ export default {
 
       //$(this).append(this.create_dropped_element(self.dragging_element_name)); //element
       $(element).contextmenu(function () {
-        //alert('Apply style')
-        /* self.selected_element = $(e.target)
-        console.log("right clicked", $(e.target).attr("class"));
-        $("#element").text( $(e.target).prop('tagName') )
-        */
-        alert('Click on an element to add inside')
+
         return false;
       });
 
       $(element).click(function (e) {
         self.selected_element = e.target
-        console.log("left clicked", $(e.target).attr("class"));
-        //$("#element").text( $(e.target).prop('tagName') ).removeClass("hidden")
+        //console.log("left clicked", $(e.target).attr("class"));
+        $("#element").text( $(e.target).prop('tagName') ).removeClass("hidden")
         //$("#element-html").val($(e.target).prop('outerHTML'))
         self.selected_element_html = $(e.target).prop('outerHTML')
 
