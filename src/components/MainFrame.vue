@@ -70,7 +70,7 @@
       <div id="button" @click="add_element" class="p-2 draggable select-none inline-flex items-center text-sm text-gray-500">
         <button class="bg-black text-white text-xs p-2 rounded-md">Button</button>
       </div>
-      <div id="input" class="p-2 draggable cursor-move select-none">
+      <div id="input" @click="add_element" class="p-2 draggable select-none">
         <div class="w-full text-xs border border-indigo-600 outline-none rounded p-2">
           Input field
         </div>
@@ -207,59 +207,59 @@
         <div class="hidden">
           <div id="flex-direction">
             <div class="flex flex-col divide-y space-y-2 my-1">
-              <div class="flex flex-row bg-indigo-50 w-72 border rounded p-1">
+              <div data-class="flex-row" class="flex flex-row bg-indigo-50 w-72 border rounded p-1">
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-row" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   1
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-row" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   2
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-row" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   3
                 </div>
               </div>
-              <div class="flex flex-row-reverse bg-indigo-50 w-72 border rounded p-1">
+              <div data-class="flex-row-reverse" class="flex flex-row-reverse bg-indigo-50 w-72 border rounded p-1">
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-row-reverse" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   1
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-row-reverse" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   2
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-row-reverse" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   3
                 </div>
               </div>
-              <div class="flex flex-col bg-indigo-50 w-72 border rounded p-1">
+              <div data-class="flex-col" class="flex flex-col bg-indigo-50 w-72 border rounded p-1">
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-col" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   1
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-col" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   2
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-col" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   3
                 </div>
               </div>
-              <div class="flex flex-col-reverse bg-indigo-50 w-72 border rounded p-1">
+              <div data-class="flex-col-reverse" class="flex flex-col-reverse bg-indigo-50 w-72 border rounded p-1">
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-col-reverse" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   1
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-col-reverse" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   2
                 </div>
                 <div
-                    class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    data-class="flex-col-reverse" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                   3
                 </div>
               </div>
@@ -2462,13 +2462,19 @@ export default {
         content(reference) {
           const id = reference.getAttribute('data-template');
           const template = document.getElementById(id);
-console.log(template)
-          let element = document.createElement("div");
-$(element).html(template).click(function(){
-  reference._tippy.hide()
-})
-return element
           //return template.innerHTML;
+
+          let element = document.createElement("div");
+          $(element).html(template).click(function(tippy_style_elem){
+            let data_class_attr = $(tippy_style_elem.target).attr('data-class')
+            if(data_class_attr !== null){
+              reference._tippy.hide()
+
+              $(self.selected_element).addClass(data_class_attr).addClass('flex')
+              self.selected_element_classes = $(self.selected_element).attr('class')
+            }
+          })
+          return element
         },
         theme: 'light-border',
         allowHTML: true,
