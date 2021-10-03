@@ -140,7 +140,7 @@
         <div class="overflow-hidden bg-white border border-gray-300 rounded-md text-gray-500 text-xs">
           <h3 class="py-1 px-2 bg-gray-100"><span id="element" class="hidden"></span> Tailwind Classes</h3>
           <div class="flex flex-wrap gap-2 p-2">
-            <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none" placeholder="Write class name">
+            <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none border-b border-indigo-500" placeholder="Write class name">
             <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
               <button v-if="class_name.length > 0 && !/selected-element|ui|droppable-flex-container/.test(class_name)" v-on:click="remove_class(class_name)" class="flex rounded-full bg-indigo-500 hover:bg-red-500 text-white pl-2 items-center">
                 .{{ class_name }}
