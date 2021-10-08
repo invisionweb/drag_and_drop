@@ -142,9 +142,9 @@
           <div class="flex flex-wrap gap-2 p-2">
             <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none border-b border-indigo-500" placeholder="Write class name">
             <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
-              <button v-if="class_name.length > 0 && !/selected-element|ui|droppable-flex-container/.test(class_name)" v-on:click="remove_class(class_name)" class="flex rounded-full bg-indigo-500 hover:bg-red-500 text-white pl-2 items-center">
+              <button v-on:click="write_class(class_name)" v-if="class_name.length > 0 && !/selected-element|ui|droppable-flex-container/.test(class_name)" class="flex rounded-full bg-indigo-500 hover:bg-indigo-700 text-white pl-2 items-center">
                 .{{ class_name }}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                <svg v-on:click.stop="remove_class(class_name)" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 rounded-full" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                 </svg>
               </button>
@@ -266,13 +266,89 @@
           </div>
         </div>
 
-        <button data-template="justify-content" class="p-2 hover:bg-indigo-100">Justify Content</button>
+        <button data-template="justify-content" class="p-2 hover:bg-indigo-100 properties">Justify Content</button>
         <!--        <select id="flex-row-or-col" @change="add_class">
                   <option>
                     flex-row
                   </option>
                   <option>flex-col</option>
                 </select>-->
+        <div class="hidden">
+          <div id="justify-content">
+              <div class="flex flex-col divide-y space-y-2 my-1">
+                <div data-class="justify-center" class="flex flex-row bg-indigo-50 w-72 border rounded p-1 justify-center">
+                  <div
+                      data-class="justify-center" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    1
+                  </div>
+                  <div
+                      data-class="justify-center" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    2
+                  </div>
+                  <div
+                      data-class="justify-center" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    3
+                  </div>
+                </div>
+                <div data-class="justify-between" class="flex flex-row bg-indigo-50 w-72 border rounded p-1 justify-between">
+                  <div
+                      data-class="justify-between" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    1
+                  </div>
+                  <div
+                      data-class="justify-between" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    2
+                  </div>
+                  <div
+                      data-class="justify-between" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    3
+                  </div>
+                </div>
+                <div data-class="justify-around" class="flex flex-row bg-indigo-50 w-72 border rounded p-1 justify-around">
+                  <div
+                      data-class="justify-around" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    1
+                  </div>
+                  <div
+                      data-class="justify-around" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    2
+                  </div>
+                  <div
+                      data-class="justify-around" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    3
+                  </div>
+                </div>
+                <div data-class="justify-end" class="flex flex-row bg-indigo-50 w-72 border rounded p-1 justify-end">
+                  <div
+                      data-class="justify-end" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    1
+                  </div>
+                  <div
+                      data-class="justify-end" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    2
+                  </div>
+                  <div
+                      data-class="justify-end" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    3
+                  </div>
+                </div>
+                <div data-class="justify-evenly" class="flex flex-row bg-indigo-50 w-72 border rounded p-1 justify-evenly">
+                  <div
+                      data-class="justify-evenly" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    1
+                  </div>
+                  <div
+                      data-class="justify-evenly" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    2
+                  </div>
+                  <div
+                      data-class="justify-evenly" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    3
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
 
       <div class="border rounded text-sm text-gray-600 flex flex-col divide-y">
@@ -1790,6 +1866,9 @@ export default {
     },
     randomImage(){
       return "https://source.unsplash.com/random"
+    },
+    write_class(class_name){
+      $("#add-class").val(class_name)
     },
     remove_class(class_name){
       if (this.selected_element === null) {
