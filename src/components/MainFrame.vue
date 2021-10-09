@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-col lg:flex-row p-6 gap-4 lg:justify-between">
     <div class="flex space-x-2 justify-center items-center">
-      <h1 class="lg:text-2xl font-medium text-gray-500">UI Builder for</h1>
+      <div class="flex flex-col border-gray-200">
+        <h1 class="text-gray-600 text-xl">UI Builder for</h1>
+        <p class="text-xs text-gray-400">Version Alpha 1.0</p>
+      </div>
       <a href="https://tailwindcss.com" target="_blank">
         <img
             alt="TailwindCSS"
@@ -138,7 +141,7 @@
       </div>
 
         <div class="overflow-hidden bg-white border border-gray-300 rounded-md text-gray-500 text-xs">
-          <h3 class="py-1 px-2 bg-gray-100"><span id="element" class="hidden"></span> Tailwind Classes</h3>
+          <h3 class="py-1 px-2 bg-gray-100"><span id="element" class="hidden"></span> Add / Remove Tailwind Classes</h3>
           <div class="flex flex-wrap gap-2 p-2">
             <input id="add-class" type="text" v-on:keyup.enter="add_class" class="outline-none border-b border-indigo-500" placeholder="Write class name">
             <template v-for="(class_name,index) in selected_element_classes.split(/\s+/)" v-bind:key="index">
