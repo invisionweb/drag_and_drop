@@ -9,7 +9,7 @@
         <img
             alt="TailwindCSS"
             class="h-6 w-auto"
-            src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.128b6e12eb85d013bc9f80a917f57efe.svg"
+            src="https://tailwindcss.com/_next/static/media/tailwindcss-logotype.ed60a6f85c663923c4d6ee9d85f359cd.svg"
         />
       </a>
     </div>
@@ -86,6 +86,12 @@
               stroke-width="2"/>
         </svg>
       </div>
+      <select id="elements" class="bg-gray-50 p-2 text-xs outline-none">
+        <option>Elements list</option>
+        <option>Button</option>
+        <option>hr</option>
+        <option>input radio</option>
+      </select>
       <div id="table" @click="add_element" class="p-2 draggable cursor-move select-none hidden">
         <div class="w-full p-2 inline-flex items-center space-x-2 bg-indigo-100 bg-stripes bg-stripes-white rounded-md">
           <div class="rounded-md text-indigo-700 font-extrabold text-center h-6 w-6">
@@ -169,6 +175,19 @@
                   d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
           </svg>
         </button>
+
+        <button class="pl-2" @click="up_element">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+          </svg>
+        </button>
+
+        <button class="pl-2" @click="down_element">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
+          </svg>
+        </button>
+
         <button class="pl-2" @click="delete_element">
           <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                xmlns="http://www.w3.org/2000/svg">
@@ -178,6 +197,7 @@
                 stroke-width="2"/>
           </svg>
         </button>
+
         <button class="pl-2 hidden" @click="remove_frame_border">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square"
                viewBox="0 0 16 16">
@@ -346,6 +366,20 @@
                   </div>
                   <div
                       data-class="justify-evenly" class="w-8 h-8 text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    3
+                  </div>
+                </div>
+                <div data-class="justify-items-stretch" class="grid grid-cols-3 bg-indigo-50 w-72 border rounded p-1 justify-items-stretch">
+                  <div
+                      data-class="justify-items-stretch" class="text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    1
+                  </div>
+                  <div
+                      data-class="justify-items-stretch" class="text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
+                    2
+                  </div>
+                  <div
+                      data-class="justify-items-stretch" class="text-white text-xl font-extrabold rounded-md flex items-center justify-center bg-indigo-300 m-1">
                     3
                   </div>
                 </div>
@@ -2038,17 +2072,15 @@ export default {
       this.selected_element_classes = classes //$(this.selected_element).attr("class")
     },
     add_element(event){
-      if (this.selected_element === null) {
-        //alert("To apply designs select one element by right clicking.");
-        this.modal_message = 'Click and select an element inside the canvas to add element.'
-        this.openModal()
-        return;
-      }
-
       let element_id = $(event.currentTarget).attr("id");
       this.dragging_element_name = element_id
 
-      $(this.selected_element).append(this.create_dropped_element())
+      if(this.selected_element === null){
+        $('#draggable-items-container').append(this.create_dropped_element())
+      }
+      else{
+        $(this.selected_element).append(this.create_dropped_element())
+      }
     },
 
     //let new_classes = ""
@@ -2080,6 +2112,20 @@ export default {
       let new_elem = $(this.selected_element).clone(true).removeClass('selected-element')
       //$(this.selected_element).clone(true).appendTo($(this.selected_element).parent())
       new_elem.insertAfter($(this.selected_element))
+    },
+    up_element() {
+      let previous_element = $(this.selected_element).prev()
+      let new_elem = $(this.selected_element).clone(true).removeClass('selected-element')
+      new_elem.insertBefore(previous_element)
+      $(this.selected_element).remove()
+      this.selected_element = new_elem
+    },
+    down_element() {
+      let previous_element = $(this.selected_element).next()
+      let new_elem = $(this.selected_element).clone(true).removeClass('selected-element')
+      new_elem.insertAfter(previous_element)
+      $(this.selected_element).remove()
+      this.selected_element = new_elem
     },
     delete_element: function () {
       $(this.selected_element).remove()
@@ -2175,8 +2221,14 @@ export default {
         if (self.right_clicked_element === null) {
           self.right_clicked_element = element
 
-          self.modal_message = 'Click an element inside the canvas to add inside this element. Right click again to revert.'
-          self.openModal()
+          $("#draggable-items-container").find('*')/*.children()*/.removeClass('selected-element')
+          $(element).addClass('selected-element').removeClass('container-frame')
+          setTimeout(function () {
+            $(element).removeClass('selected-element')
+          }, 1000)
+
+          //self.modal_message = 'Click an element inside the canvas to add inside this element. Right click again to revert.'
+          //self.openModal()
         }
         else{
           self.right_clicked_element = null
@@ -2207,10 +2259,18 @@ export default {
         return false;
       });
 
-      $(element).hover(function (){
-        $(element).addClass('container-frame')
-      }).mouseleave(function(){
-        $(element).removeClass('container-frame')
+      $(element).hover(function (child_event){
+        child_event.preventDefault()
+        //child_event.stopPropagation()
+        $("#draggable-items-container").find('*')/*.children()*/.removeClass('selected-element container-frame')
+        $(child_event.target).addClass('container-frame')
+      }).mouseleave(function(child_event){
+        //child_event.preventDefault()
+        //$("#draggable-items-container").find('*')/*.children()*/.removeClass('selected-element container-frame')
+        $(child_event.target).removeClass('container-frame')
+        if($(child_event.target).parent().attr("id") !== "draggable-items-container"){
+          $(child_event.target).parent().addClass('container-frame')
+        }
       })
 
       /*tippy(element, {

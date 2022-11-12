@@ -4,8 +4,8 @@
 @tailwind utilities;
 
 .selected-element {
-    @apply ring-1 ring-indigo-500;
+    @apply border-dashed border-2 border-purple-500;
 }
 .container-frame {
-    @apply ring-1 ring-red-500;
+    @apply border-dashed border-2 border-gray-500;
 }
